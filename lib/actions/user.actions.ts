@@ -2,7 +2,6 @@
 
 import { cookies } from "next/headers";
 import { createAdminClient } from "../appwrite.config";
-import { redirect } from "next/navigation";
 
 export const logIn = async ({
   email,
@@ -20,8 +19,7 @@ export const logIn = async ({
       sameSite: "strict",
       secure: true,
     });
-
-    redirect("/");
+    return session.userId;
   } catch (error) {
     console.error("Error", error);
   }

@@ -1,9 +1,9 @@
-import LoginForm from "@/components/forms/LoginForm";
+import AuthForm from "@/components/forms/AuthForm";
 
 const Login = () => {
   return (
     <section className="flex items-center justify-center h-screen">
-      <LoginForm />
+      <AuthForm type="login" />
     </section>
   );
 };

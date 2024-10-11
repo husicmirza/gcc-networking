@@ -47,6 +47,7 @@ interface CustomFormFieldProps {
   children?: React.ReactNode;
   renderSkeleton?: (field: any) => React.ReactNode;
   fieldType: FormFieldType;
+  type?: string;
 }
 
 const RenderInput = ({
@@ -71,8 +72,9 @@ const RenderInput = ({
           )}
           <FormControl>
             <Input
-              placeholder={props.placeholder}
               {...field}
+              type={props.type}
+              placeholder={props.placeholder}
               className="border-0"
             />
           </FormControl>
@@ -168,7 +170,7 @@ const CustomFormField = (props: CustomFormFieldProps) => {
       render={({ field }) => (
         <FormItem className="flex-1">
           {fieldType !== FormFieldType.CHECKBOX && label && (
-            <FormLabel>{label}</FormLabel>
+            <FormLabel className="text-muted-foreground">{label}</FormLabel>
           )}
           <RenderInput field={field} props={props} />
           <FormMessage className="text-red-400" />
