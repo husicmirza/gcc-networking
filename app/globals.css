@@ -76,3 +76,43 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .text-14-medium {
+    @apply text-[14px] leading-[18px] font-medium;
+  }
+
+  /* =====  REACT PHONE NUMBER INPUT OVERRIDES */
+  .input-phone {
+    @apply mt-2 h-10 rounded-md px-3 text-sm border !important;
+  }
+
+  /* =====  REACT DATE PICKER OVERRIDES */
+  .date-picker {
+    @apply overflow-hidden border-transparent w-full h-10 text-14-medium rounded-md px-3 outline-none !important;
+  }
+}
+
+/* =====  REACT-DATEPICKER OVERRIDES */
+.react-datepicker-wrapper.date-picker {
+  display: flex;
+  align-items: center;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  outline: none;
+}
+
+.react-datepicker__time-list-item {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* =====  REACT PHONE NUMBER INPUT OVERRIDES */
+.PhoneInputInput {
+  outline: none;
+  margin-left: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
