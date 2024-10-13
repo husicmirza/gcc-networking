@@ -1,7 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { createAdminClient } from "../appwrite.config";
+import { createAdminClient, createSessionClient } from "../appwrite.config";
 import { ID } from "node-appwrite";
 import { parseStringify } from "../utils";
 
@@ -68,5 +68,33 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
     return parseStringify(newUser);
   } catch (error) {
     console.error("Error", error);
+  }
+};
+
+export const getLoggedInUser = async () => {
+  try {
+    const { account } = await createSessionClient();
+    const result = await account.get();
+
+    const user: LoggedInUser = {
+      userId: result.$id,
+      name: result.name,
+      email: result.email,
+    };
+    return user;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    const { account } = await createSessionClient();
+    cookies().delete("session");
+    await account.deleteSession("current");
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 };
