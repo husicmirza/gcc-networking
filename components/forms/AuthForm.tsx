@@ -10,7 +10,7 @@ import CustomFormField, { FormFieldType } from "../CustomFormField";
 import { useForm } from "react-hook-form";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { logIn } from "@/lib/actions/user.actions";
+import { logIn, signUp } from "@/lib/actions/user.actions";
 import { useToast } from "@/hooks/use-toast";
 
 const AuthForm = ({ type }: { type: string }) => {
@@ -27,10 +27,10 @@ const AuthForm = ({ type }: { type: string }) => {
       password: "",
     },
   });
-
+  // TODO: format date
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-
+    let user;
     try {
       if (type === "signup") {
         const userData = {
@@ -46,25 +46,24 @@ const AuthForm = ({ type }: { type: string }) => {
           password: data.password,
         };
 
-        // const newUser = await signUp(userData);
-        // if (response) router.push("/");
+        user = await signUp(userData);
       }
 
       if (type === "login") {
-        const user = await logIn({
+        user = await logIn({
           email: data.email,
           password: data.password,
         });
-        if (user) {
-          router.push("/");
-        } else {
-          toast({
-            variant: "destructive",
-            title: "Something went wrong!",
-            description:
-              "Invalid credentials. Please check the email and password.",
-          });
-        }
+      }
+
+      if (user) {
+        router.push("/");
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Something went wrong!",
+          description: "Please try again.",
+        });
       }
     } catch (error) {
       console.log(error);

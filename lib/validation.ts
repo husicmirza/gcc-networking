@@ -32,7 +32,7 @@ export const authFormSchema = (type: string) =>
     dateOfBirth:
       type === "login"
         ? z.string().optional()
-        : z.coerce.date({ message: "Invalid date of birth" }),
+        : z.coerce.string().min(2, "Invalid date of birth"),
     phone:
       type === "login"
         ? z.string().optional()
