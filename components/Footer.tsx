@@ -8,14 +8,12 @@ const Footer = ({ user }: { user: LoggedInUser }) => {
     if (loggedOut) redirect("/loginin");
   };
   return (
-    <footer className="flex items-center justify-between gap-2 py-6 border-t border-gray-200">
+    <footer className="flex items-center justify-between gap-2 py-6 border-t border-gray-200 text-muted-foreground">
       <div className={"flex flex-1 flex-col justify-center"}>
-        <h1 className="truncate text-gray-400 font-semibold">{user.name}</h1>
-        <p className="text-sm truncate font-normal text-gray-400">
-          {user.email}
-        </p>
+        <h1 className="truncate font-semibold">{user.name}</h1>
+        <p className="text-sm truncate font-normal">{user.email}</p>
       </div>
-      <div onClick={handleLogOut} className="text-gray-400 cursor-pointer">
+      <div onClick={handleLogOut} className="cursor-pointer">
         <LogOut />
       </div>
     </footer>

@@ -1,5 +1,10 @@
 export const sidebarLinks = [
   {
+    icon: "LayoutDashboard",
+    route: "",
+    label: "Dashboard",
+  },
+  {
     icon: "CircleUser",
     route: "/profile",
     label: "Profile",

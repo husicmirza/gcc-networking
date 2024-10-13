@@ -10,8 +10,9 @@ import Footer from "./Footer";
 
 const Sidebar = ({ user }: { user: LoggedInUser }) => {
   const pathname = usePathname();
+  console.log(pathname);
   return (
-    <section className="sticky left-0 top-0 flex h-screen w-fit flex-col justify-between border-r bg-gray-100 border-gray-200 shadow-md pt-8 text-white max-md:hidden sm:p-4 xl:p-6 xl:w-[300px]">
+    <section className="sticky left-0 top-0 flex h-screen w-fit flex-col justify-between border-r bg-primary-foreground border-border shadow-md pt-8 max-md:hidden sm:p-4 xl:p-6 xl:w-[300px]">
       <nav className="flex flex-col gap-4">
         <Link
           href="/"
@@ -26,21 +27,20 @@ const Sidebar = ({ user }: { user: LoggedInUser }) => {
           />
         </Link>
         {sidebarLinks.map((item) => {
-          const isActive =
-            pathname === item.route || pathname.endsWith(`/${item.route}`);
+          const isActive = pathname.endsWith(`/dashboard${item.route}`);
 
           return (
             <Link
               key={item.label}
-              href={`/dashboard/${item.route}`}
+              href={`/dashboard${item.route}`}
               className={cn(
-                "flex gap-3 items-center py-1 md:p-3 rounded-lg justify-center xl:justify-start text-gray-400 w-full",
-                { "bg-gray-300": isActive }
+                "flex gap-3 items-center py-1 md:p-3 rounded-lg justify-center xl:justify-start text-muted-foreground w-full",
+                { "bg-primary": isActive }
               )}
             >
               <div
-                className={cn("relative size-6 text-grey-700", {
-                  "text-white": isActive,
+                className={cn("relative size-6", {
+                  "text-primary-foreground": isActive,
                 })}
               >
                 <Icon name={item.icon} />
@@ -49,7 +49,7 @@ const Sidebar = ({ user }: { user: LoggedInUser }) => {
                 className={cn(
                   "text-16 font-semibold text-black-2 max-xl:hidden",
                   {
-                    "!text-white": isActive,
+                    "!text-background": isActive,
                   }
                 )}
               >
