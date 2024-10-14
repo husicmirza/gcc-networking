@@ -98,3 +98,17 @@ export const logoutUser = async () => {
     return null;
   }
 };
+
+export const getUsers = async () => {
+  try {
+    const { database } = await createAdminClient();
+    const users = await database.listDocuments(
+      DATABASE_ID!,
+      USER_COLLECTION_ID!
+    );
+    return parseStringify(users.documents);
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
