@@ -8,11 +8,10 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import { useForm } from "react-hook-form";
-import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { logIn, signUp } from "@/lib/actions/user.actions";
 import { useToast } from "@/hooks/use-toast";
-
+import { IconLoader } from "@tabler/icons-react";
 const AuthForm = ({ type }: { type: string }) => {
   const typeLable = type === "login" ? "Login" : "Sign up";
   const formSchema = authFormSchema(type);
@@ -176,7 +175,7 @@ const AuthForm = ({ type }: { type: string }) => {
                 {" "}
                 {isLoading ? (
                   <>
-                    <Loader2 size={20} className="animate-spin" />
+                    <IconLoader size={20} className="animate-spin" />
                     Loading...
                   </>
                 ) : type === "login" ? (

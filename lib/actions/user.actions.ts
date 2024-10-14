@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { createAdminClient, createSessionClient } from "../appwrite.config";
 import { ID } from "node-appwrite";
 import { parseStringify } from "../utils";
+import { redirect } from "next/navigation";
 
 const { DATABASE_ID, USER_COLLECTION_ID } = process.env;
 
@@ -97,4 +98,5 @@ export const logoutUser = async () => {
     console.log(error);
     return null;
   }
+  redirect("/login");
 };
