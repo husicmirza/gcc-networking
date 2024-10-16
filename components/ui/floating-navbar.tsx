@@ -3,7 +3,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import AuthButton from "../AuthButton";
+import AuthButton from "../navigation/AuthButton";
 
 export const FloatingNav = ({
   navItems,

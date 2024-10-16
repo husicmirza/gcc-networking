@@ -1,8 +1,8 @@
 import React from "react";
-import { SidebarLink } from "./ui/sidebar";
 import { logoutUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 import { IconLogout2 } from "@tabler/icons-react";
+import { SidebarLink } from "../ui/sidebar";
 
 const DashboardFooter = () => {
   const handleLogOut = async () => {

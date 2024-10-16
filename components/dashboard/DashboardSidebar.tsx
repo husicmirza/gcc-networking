@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Sidebar, SidebarBody, SidebarLink } from "./ui/sidebar";
+import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
 
 import Image from "next/image";
 import { sidebarLinks } from "@/constants";

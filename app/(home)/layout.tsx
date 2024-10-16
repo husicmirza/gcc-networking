@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer/Footer";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import { navItems } from "@/constants";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
