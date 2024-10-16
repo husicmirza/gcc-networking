@@ -6,7 +6,7 @@ import { Form } from "@/components/ui/form";
 import { z } from "zod";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import CustomFormField, { FormFieldType } from "../CustomFormField";
+import CustomFormField, { FormFieldType } from "./CustomFormField";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { logIn, signUp } from "@/lib/actions/user.actions";

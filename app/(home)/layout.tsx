@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer/Footer";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import { navItems } from "@/constants";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
@@ -19,7 +19,7 @@ export default async function RootLayout({
   return (
     <main className="flex flex-col min-h-screen">
       <FloatingNav navItems={navItems} user={user} />
-      <div className="flex-grow pt-40">{children}</div>
+      <div className="flex-grow pt-32">{children}</div>
       <Footer />
     </main>
   );
