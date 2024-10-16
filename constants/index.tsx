@@ -35,16 +35,22 @@ export const navItems = [
   {
     name: "Home",
     link: "/",
-    icon: <IconHome className="h-5 w-5 text-neutral-700" />,
+    icon: (
+      <IconHome className="h-5 w-5 text-neutral-700 hover:text-neutral-500" />
+    ),
   },
   {
     name: "Blog",
     link: "/posts",
-    icon: <IconBlockquote className="h-5 w-5 text-neutral-700" />,
+    icon: (
+      <IconBlockquote className="h-5 w-5 text-neutral-700 hover:text-neutral-500" />
+    ),
   },
   {
     name: "Contact",
     link: "/contact",
-    icon: <IconMessage className="h-5 w-5 text-neutral-700" />,
+    icon: (
+      <IconMessage className="h-5 w-5 text-neutral-700 hover:text-neutral-500" />
+    ),
   },
 ];
