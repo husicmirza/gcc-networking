@@ -5,7 +5,7 @@ import { getAllPosts } from "@/lib/actions/posts.api";
 export default function Posts() {
   const allPosts = getAllPosts();
   const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(0, 2);
+  const morePosts = allPosts.slice(0, 3);
   console.log(heroPost.title);
   return (
     <main className="container mx-auto px-5">

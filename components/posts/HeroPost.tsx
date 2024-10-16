@@ -2,6 +2,7 @@ import Link from "next/link";
 import CoverImage from "./CoverImage";
 import DateFormatter from "./DateFormatter";
 import Avatar from "./Avatar";
+import { IconArrowRight } from "@tabler/icons-react";
 
 type HeroPostProps = {
   title: string;
@@ -38,7 +39,16 @@ const HeroPost = ({
         </div>
         <div>
           <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-          <Avatar name={author.name} picture={author.picture} />
+          <div className="flex justify-between items-end">
+            <Avatar name={author.name} picture={author.picture} />
+            <Link
+              href={`/posts/${slug}`}
+              className="underline flex items-center pb-2 pr-1 hover:text-neutral-500"
+            >
+              See More
+              <IconArrowRight className="ml-1" size={20} />
+            </Link>
+          </div>
         </div>
       </div>
     </section>
