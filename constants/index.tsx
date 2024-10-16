@@ -33,24 +33,37 @@ export const sidebarLinks = [
 
 export const navItems = [
   {
-    name: "Home",
-    link: "/",
+    label: "Home",
+    href: "/",
     icon: (
       <IconHome className="h-5 w-5 text-neutral-700 hover:text-neutral-500" />
     ),
   },
   {
-    name: "Blog",
-    link: "/posts",
+    label: "Blog",
+    href: "/posts",
     icon: (
       <IconBlockquote className="h-5 w-5 text-neutral-700 hover:text-neutral-500" />
     ),
   },
   {
-    name: "Contact",
-    link: "/contact",
+    label: "Contact",
+    href: "/contact",
     icon: (
       <IconMessage className="h-5 w-5 text-neutral-700 hover:text-neutral-500" />
     ),
+  },
+];
+
+export const menuItems = [
+  {
+    label: "Profile",
+    href: "/dashboard/profile",
+    icon: <IconUserBolt className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
+  },
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: <IconDashboard className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
   },
 ];

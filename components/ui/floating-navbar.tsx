@@ -11,8 +11,8 @@ export const FloatingNav = ({
   user,
 }: {
   navItems: {
-    name: string;
-    link: string;
+    label: string;
+    href: string;
     icon?: JSX.Element;
   }[];
   className?: string;
@@ -29,14 +29,14 @@ export const FloatingNav = ({
         {navItems.map((navItem: any, idx: number) => (
           <Link
             key={`link=${idx}`}
-            href={navItem.link}
+            href={navItem.href}
             className={cn(
               "relative  items-center flex text-neutral-700 hover:text-neutral-500"
             )}
           >
             <div className="flex items-center space-x-1">
               <span className="block ">{navItem.icon}</span>
-              <span className="hidden sm:block text-sm">{navItem.name}</span>
+              <span className="hidden sm:block text-sm">{navItem.label}</span>
             </div>
           </Link>
         ))}
