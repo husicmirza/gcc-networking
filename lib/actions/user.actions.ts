@@ -7,7 +7,10 @@ import { parseStringify } from "../utils";
 import { redirect } from "next/navigation";
 
 const { DATABASE_ID, USER_COLLECTION_ID } = process.env;
-export const getUserInfo = async ({ userId }: { userId: string }) => {
+
+export const getUserInfo = async ({ userId }: { userId?: string }) => {
+  if (!userId) return null;
+
   try {
     const { database } = await createAdminClient();
 
@@ -16,10 +19,13 @@ export const getUserInfo = async ({ userId }: { userId: string }) => {
       USER_COLLECTION_ID!,
       [Query.equal("$id", [userId])]
     );
-
+    if (!user.documents.length) {
+      return null;
+    }
     return parseStringify(user.documents[0]);
   } catch (error) {
     console.log(error);
+    return null;
   }
 };
 export const logIn = async ({
