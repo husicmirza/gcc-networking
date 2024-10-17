@@ -1,0 +1,54 @@
+"use client";
+import { ColumnDef } from "@tanstack/react-table";
+import { Button } from "../ui/button";
+import Link from "next/link";
+
+export const columns: ColumnDef<User>[] = [
+  {
+    accessorKey: "name",
+    header: "Name",
+    cell: ({ row }) => {
+      const firstName = row.original.firstName;
+      const lastName = row.original.lastName;
+      return (
+        <p className="text-14-medium ">
+          {firstName} {lastName}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: "email",
+    header: "Email",
+    cell: ({ row }) => {
+      const email = row.original.email;
+      return <p className="text-14-medium ">{email}</p>;
+    },
+  },
+  {
+    accessorKey: "location",
+    header: "Location",
+    cell: ({ row }) => {
+      const city = row.original.city;
+      const country = row.original.country;
+      return (
+        <p className="text-14-medium ">
+          {city} {country}
+        </p>
+      );
+    },
+  },
+  {
+    id: "action",
+    header: "Action",
+    cell: ({ row }) => {
+      const id = row.original.$id;
+
+      return (
+        <Link href={`?id=${id}`}>
+          <Button size="sm">View</Button>
+        </Link>
+      );
+    },
+  },
+];

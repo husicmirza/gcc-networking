@@ -2,12 +2,26 @@
 
 import { cookies } from "next/headers";
 import { createAdminClient, createSessionClient } from "../appwrite.config";
-import { ID } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
 import { redirect } from "next/navigation";
 
 const { DATABASE_ID, USER_COLLECTION_ID } = process.env;
+export const getUserInfo = async ({ userId }: { userId: string }) => {
+  try {
+    const { database } = await createAdminClient();
 
+    const user = await database.listDocuments(
+      DATABASE_ID!,
+      USER_COLLECTION_ID!,
+      [Query.equal("$id", [userId])]
+    );
+
+    return parseStringify(user.documents[0]);
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const logIn = async ({
   email,
   password,

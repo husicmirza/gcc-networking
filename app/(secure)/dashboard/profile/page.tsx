@@ -1,12 +1,7 @@
-import PeopleContainer from "@/components/PeopleContainer";
 import React from "react";
 
 const ProfilePage = () => {
-  return (
-    <div>
-      <PeopleContainer />
-    </div>
-  );
+  return <div>Profile</div>;
 };
 
 export default ProfilePage;
