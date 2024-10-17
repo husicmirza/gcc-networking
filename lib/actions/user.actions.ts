@@ -19,9 +19,9 @@ export const getUserInfo = async ({ userId }: { userId?: string }) => {
       USER_COLLECTION_ID!,
       [Query.equal("$id", [userId])]
     );
-    if (!user.documents.length) {
-      return null;
-    }
+
+    if (!user.documents.length) return null;
+
     return parseStringify(user.documents[0]);
   } catch (error) {
     console.log(error);
