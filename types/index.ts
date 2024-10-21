@@ -13,12 +13,6 @@ declare type SignUpParams = {
   password: string;
 };
 
-declare type LoggedInUser = {
-  userId: string;
-  email: string;
-  name: string;
-};
-
 declare type User = {
   $id: string;
   userId: string;

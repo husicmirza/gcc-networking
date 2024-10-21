@@ -94,15 +94,17 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
 
 export const getLoggedInUser = async () => {
   try {
+    const { database } = await createAdminClient();
     const { account } = await createSessionClient();
     const result = await account.get();
 
-    const user: LoggedInUser = {
-      userId: result.$id,
-      name: result.name,
-      email: result.email,
-    };
-    return user;
+    const user = await database.listDocuments(
+      DATABASE_ID!,
+      USER_COLLECTION_ID!,
+      [Query.equal("userId", [result.$id])]
+    );
+
+    return parseStringify(user.documents[0]);
   } catch (error) {
     console.log(error);
     return null;
