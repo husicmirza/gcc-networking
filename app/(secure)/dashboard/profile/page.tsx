@@ -1,3 +1,4 @@
+
 import React from "react";
 
 const ProfilePage = () => {
@@ -5,3 +6,4 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+

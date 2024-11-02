@@ -121,6 +121,7 @@ export const logoutUser = async () => {
     return null;
   }
   redirect("/login");
+
 };
 
 export const getUsers = async () => {
@@ -135,4 +136,5 @@ export const getUsers = async () => {
     console.log(error);
     return null;
   }
+
 };
