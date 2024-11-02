@@ -2,12 +2,32 @@
 
 import { cookies } from "next/headers";
 import { createAdminClient, createSessionClient } from "../appwrite.config";
-import { ID } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
 import { redirect } from "next/navigation";
 
 const { DATABASE_ID, USER_COLLECTION_ID } = process.env;
 
+export const getUserInfo = async ({ userId }: { userId?: string }) => {
+  if (!userId) return null;
+
+  try {
+    const { database } = await createAdminClient();
+
+    const user = await database.listDocuments(
+      DATABASE_ID!,
+      USER_COLLECTION_ID!,
+      [Query.equal("$id", [userId])]
+    );
+
+    if (!user.documents.length) return null;
+
+    return parseStringify(user.documents[0]);
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 export const logIn = async ({
   email,
   password,
@@ -74,15 +94,17 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
 
 export const getLoggedInUser = async () => {
   try {
+    const { database } = await createAdminClient();
     const { account } = await createSessionClient();
     const result = await account.get();
 
-    const user: LoggedInUser = {
-      userId: result.$id,
-      name: result.name,
-      email: result.email,
-    };
-    return user;
+    const user = await database.listDocuments(
+      DATABASE_ID!,
+      USER_COLLECTION_ID!,
+      [Query.equal("userId", [result.$id])]
+    );
+
+    return parseStringify(user.documents[0]);
   } catch (error) {
     console.log(error);
     return null;
@@ -99,4 +121,20 @@ export const logoutUser = async () => {
     return null;
   }
   redirect("/login");
+
+};
+
+export const getUsers = async () => {
+  try {
+    const { database } = await createAdminClient();
+    const users = await database.listDocuments(
+      DATABASE_ID!,
+      USER_COLLECTION_ID!
+    );
+    return parseStringify(users.documents);
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+
 };

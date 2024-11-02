@@ -12,7 +12,9 @@ import { menuItems } from "@/constants";
 import { IconLogout2 } from "@tabler/icons-react";
 import { logoutUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
-const NavMenu = ({ user }: { user: LoggedInUser }) => {
+
+const NavMenu = ({ user }: { user: User }) => {
+
   const handleLogOut = async () => {
     const loggedOut = await logoutUser();
     if (loggedOut) redirect("/login");
@@ -21,7 +23,11 @@ const NavMenu = ({ user }: { user: LoggedInUser }) => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>{user.name}</NavigationMenuTrigger>
+
+          <NavigationMenuTrigger>
+            {user.firstName} {user.lastName}
+          </NavigationMenuTrigger>
+
           <NavigationMenuContent>
             <ul className="flex flex-col py-2 px-2 md:w-[150px] text-sm">
               {menuItems.map((item) => (
