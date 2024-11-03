@@ -1,16 +1,16 @@
 "use client";
 import React, { useState } from "react";
-import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
 import { companyItems } from "@/constants";
 import CompaniesFilters from "./CompaniesFilters";
 import { useSearchParams } from "next/navigation";
+import { CompanyGridItem, Grid } from "../ui/grid";
 
 const CompaniesContainer = () => {
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get("query") || "");
 
   return (
-    <div className="flex h-full space-y-8 flex-col max-w-4xl mx-auto">
+    <div className="flex space-y-8 flex-col max-w-5xl mx-auto w-full">
       <div className="border-b pb-2">
         <h2 className="text-2xl font-bold tracking-tight">Hi there! 👋</h2>
         <p className="text-muted-foreground">
@@ -18,9 +18,9 @@ const CompaniesContainer = () => {
         </p>
       </div>
       <CompaniesFilters searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <BentoGrid className="max-w-4xl mx-auto">
+      <Grid>
         {companyItems.map((item, i) => (
-          <BentoGridItem
+          <CompanyGridItem
             key={i}
             title={item.title}
             description={item.description}
@@ -28,7 +28,7 @@ const CompaniesContainer = () => {
             badge={item.badge}
           />
         ))}
-      </BentoGrid>
+      </Grid>
     </div>
   );
 };
