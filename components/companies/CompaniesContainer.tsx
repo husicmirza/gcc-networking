@@ -1,14 +1,9 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import { companyItems } from "@/constants";
-import CompaniesFilters from "./CompaniesFilters";
-import { useSearchParams } from "next/navigation";
 import { CompanyGridItem, Grid } from "../ui/grid";
+import CompaniesFiltersWrapper from "./CompaniesFiltersWrapper";
 
 const CompaniesContainer = () => {
-  const searchParams = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState(searchParams.get("query") || "");
-
   return (
     <div className="flex space-y-8 flex-col max-w-5xl mx-auto w-full">
       <div className="border-b pb-2">
@@ -17,7 +12,7 @@ const CompaniesContainer = () => {
           Here&apos;s a list of Balkan Companies in the GCC!
         </p>
       </div>
-      <CompaniesFilters searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <CompaniesFiltersWrapper />
       <Grid>
         {companyItems.map((item, i) => (
           <CompanyGridItem

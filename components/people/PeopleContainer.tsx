@@ -1,10 +1,17 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 
 import ProfileSheetWrapper from "./ProfileSheetWrapper";
 import { Grid, PeopleGridItem } from "../ui/grid";
+import CompaniesFilters from "../companies/CompaniesFilters";
+import { useSearchParams } from "next/navigation";
 
-const PeopleContainer = async ({ searchParams }: SearchParamProps) => {
+const PeopleContainer = () => {
   // const users = await getUsers();
+  // { searchParams }: SearchParamProps
+  // const searchParams = useSearchParams();
+
+  // const [searchTerm, setSearchTerm] = useState(searchParams.get("query") || "");
   return (
     <div className="flex space-y-8 flex-col max-w-4xl mx-auto w-full">
       <div className="border-b pb-2">
@@ -14,13 +21,14 @@ const PeopleContainer = async ({ searchParams }: SearchParamProps) => {
         </p>
       </div>
       {/* <DataTable data={users} columns={columns} /> */}
+      {/* <CompaniesFilters searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
       <Grid>
         <PeopleGridItem />
         <PeopleGridItem />
         <PeopleGridItem />
         <PeopleGridItem />
       </Grid>
-      <ProfileSheetWrapper searchParams={searchParams} />
+      {/* <ProfileSheetWrapper searchParams={searchParams} /> */}
     </div>
   );
 };

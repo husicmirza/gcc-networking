@@ -40,22 +40,16 @@ const countryOptions = [
   },
 ];
 
-interface CompaniesFiltersProps {
-  searchTerm: string;
-  setSearchTerm: (searchTerm: string) => void;
-}
-const CompaniesFilters = ({
-  searchTerm,
-  setSearchTerm,
-}: CompaniesFiltersProps) => {
+const CompaniesFilters = () => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
 
+  const [searchTerm, setSearchTerm] = useState(searchParams.get("query") || "");
   const [industry, setIndustry] = useState(
     searchParams.get("industry") || "all"
   );
   const [country, setCountry] = useState(searchParams.get("country") || "all");
-  console.log(industry);
+
   const updateFilterParams = (): void => {
     const params = new URLSearchParams(searchParams);
     console.log(params);
@@ -74,6 +68,7 @@ const CompaniesFilters = ({
 
     replace(`?${params.toString()}`);
   };
+
   const resetFilters = (): void => {
     const isAlreadyDefault =
       searchParams.get("query") === "" &&
@@ -98,8 +93,8 @@ const CompaniesFilters = ({
   };
 
   return (
-    <div className="flex w-full justify-between">
-      <div className="flex gap-4">
+    <>
+      <div className="flex gap-4 flex-col sm:flex-row">
         <div className="flex flex-col gap-2">
           <Label className="text-muted-foreground">Search</Label>
           <Input
@@ -115,7 +110,7 @@ const CompaniesFilters = ({
             value={industry}
             defaultValue={industry}
           >
-            <SelectTrigger className="w-48">
+            <SelectTrigger className="w-full md:w-48">
               <SelectValue placeholder="Select an industry" />
             </SelectTrigger>
             <SelectContent>
@@ -134,7 +129,7 @@ const CompaniesFilters = ({
             value={country}
             defaultValue={country}
           >
-            <SelectTrigger className="w-48">
+            <SelectTrigger className="w-full md:w-48">
               <SelectValue placeholder="Select a country" />
             </SelectTrigger>
             <SelectContent>
@@ -154,16 +149,20 @@ const CompaniesFilters = ({
           onClick={() => {
             updateFilterParams();
           }}
+          className="w-full"
         >
           Apply
         </Button>
-        <div className="ml-2 hidden lg:flex">
-          <Button variant="secondary" size="sm" onClick={resetFilters}>
-            Reset
-          </Button>
-        </div>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={resetFilters}
+          className="w-full"
+        >
+          Reset
+        </Button>
       </div>
-    </div>
+    </>
   );
 };
 
