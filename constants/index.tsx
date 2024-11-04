@@ -6,6 +6,7 @@ import {
   IconHome,
   IconBlockquote,
   IconMessage,
+  IconBriefcase,
 } from "@tabler/icons-react";
 
 export const sidebarLinks = [
@@ -28,6 +29,11 @@ export const sidebarLinks = [
     label: "Companies",
     href: "/dashboard/companies",
     icon: <IconBuildings className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
+  },
+  {
+    label: "Services",
+    href: "/dashboard/services",
+    icon: <IconBriefcase className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
   },
 ];
 

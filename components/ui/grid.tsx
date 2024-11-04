@@ -104,3 +104,70 @@ export const PeopleGridItem = ({
     </div>
   );
 };
+
+export const ServiceGridItem = ({
+  className,
+  title,
+  description,
+  image,
+  badge,
+  location,
+}: {
+  className?: string;
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
+  image?: string;
+  badge?: string;
+  location?: string;
+}) => {
+  return (
+    <div
+      className={cn(
+        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input bg-white border border-neutral-200 flex flex-col shadow-sm cursor-pointer",
+        className
+      )}
+    >
+      <div className="px-6 py-3">
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-light text-muted-foreground">
+            Mar 10, 2019
+          </span>
+          <Badge variant="success">Profesional Trening</Badge>
+        </div>
+
+        <div className="mt-2">
+          <p className="text-xl font-bold text-neutral-600  hover:text-gray-700 hover:underline">
+            Accessibility tools for designers and developers
+          </p>
+          <p className="mt-2 text-neutral-500">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
+            expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos
+            enim reprehenderit nisi, accusamus delectus nihil quis facere in
+            modi ratione libero!
+          </p>
+        </div>
+
+        <div className="flex items-center justify-between mt-4">
+          <div className="flex items-center">
+            <img
+              className="hidden object-cover w-10 h-10 mr-4 rounded-full sm:block"
+              src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=40&q=80"
+              alt="avatar"
+            />
+            <p className="font-bold text-neutral-700 cursor-pointer">
+              Khatab wedaa
+            </p>
+          </div>
+          {/* <a
+            href="#"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+            tabIndex="0"
+            role="link"
+          >
+            Read more
+          </a> */}
+        </div>
+      </div>
+    </div>
+  );
+};
