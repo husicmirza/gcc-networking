@@ -10,9 +10,9 @@ import {
 
 const ProfileHeader = () => {
   return (
-    <section className="bg-white shadow-md rounded-xl relative flex flex-col">
-      <div className="h-40 bg-neutral-200 rounded-xl flex">
-        <div className="bottom-0 ml-40 transform -translate-x-1/2 translate-y-1/2">
+    <section className="bg-white shadow-md rounded-xl flex flex-col">
+      <div className="h-40 bg-neutral-200 rounded-xl flex justify-center lg:justify-start">
+        <div className="lg:ml-20 mt-20">
           <Image
             className="object-contain object-center w-40 h-40 rounded-full border-2 bg-white"
             src="/assets/me1.png"
@@ -22,9 +22,9 @@ const ProfileHeader = () => {
           />
         </div>
       </div>
-      <div className="flex justify-end ml-8">
-        <div className="flex px-6 py-6 gap-x-16 justify-between w-[75%]">
-          <div className="flex flex-col gap-y-2">
+      <div className="flex lg:justify-end lg:ml-8 lg:pl-8 justify-center mt-20 lg:mt-0">
+        <div className="flex px-6 py-6 gap-8 flex-col lg:flex-row lg:justify-between lg:w-[75%] items-center lg:items-start">
+          <div className="flex flex-col gap-y-2 justify-center items-center lg:justify-start lg:items-start w-full">
             <h1 className="text-2xl font-semibold text-gray-800">
               Mirza Husic
             </h1>
