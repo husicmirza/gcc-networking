@@ -6,7 +6,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="flex h-screen w-full">
+    <main className="flex w-full">
       <DashboardSidebar>{children}</DashboardSidebar>
     </main>
   );
