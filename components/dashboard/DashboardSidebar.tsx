@@ -19,7 +19,7 @@ const DashboardSidebar = ({
   return (
     <div
       className={cn(
-        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1  border border-neutral-200 dark:border-neutral-700 overflow-hidden h-screen"
+        "rounded-md flex flex-col md:flex-row bg-white w-full flex-1 border border-neutral-200 overflow-hidden h-screen"
       )}
     >
       <Sidebar open={open} setOpen={setOpen}>
@@ -36,7 +36,7 @@ const DashboardSidebar = ({
         </SidebarBody>
       </Sidebar>
       <div className="flex flex-1 overflow-auto">
-        <div className="p-6 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full overflow-auto">
+        <div className="p-6 md:p-10 rounded-tl-2xl border border-neutral-200 bg-neutral-50 flex flex-col gap-2 flex-1 w-full overflow-auto">
           {children}
         </div>
       </div>
@@ -59,7 +59,7 @@ const Logo = () => {
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="font-medium text-neutral-700 dark:text-white whitespace-pre"
+        className="font-medium text-neutral-700 whitespace-pre"
       >
         GCC Netwokring
       </motion.span>
