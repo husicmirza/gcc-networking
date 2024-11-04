@@ -10,8 +10,15 @@ import {
 
 const ProfileHeader = () => {
   return (
-    <section className="bg-white shadow-md rounded-xl flex flex-col">
-      <div className="h-40 bg-neutral-200 rounded-xl flex justify-center lg:justify-start">
+    <section className="bg-white shadow-md rounded-2xl flex flex-col">
+      <div
+        className="h-40 bg-neutral-300 border rounded-2xl flex justify-center lg:justify-start"
+        style={{
+          backgroundImage: "url('/assets/bg-profile1.jpg')",
+          backgroundSize: "contain",
+          backgroundPosition: "center",
+        }}
+      >
         <div className="lg:ml-20 mt-20">
           <Image
             className="object-contain object-center w-40 h-40 rounded-full border-2 bg-white"
@@ -25,7 +32,7 @@ const ProfileHeader = () => {
       <div className="flex lg:justify-end lg:ml-8 lg:pl-8 justify-center mt-20 lg:mt-0">
         <div className="flex px-6 py-6 gap-8 flex-col lg:flex-row lg:justify-between lg:w-[75%] items-center lg:items-start">
           <div className="flex flex-col gap-y-2 justify-center items-center lg:justify-start lg:items-start w-full">
-            <h1 className="text-2xl font-semibold text-gray-800">
+            <h1 className="text-2xl font-semibold text-neutral-700">
               Mirza Husic
             </h1>
             <p className=" text-neutral-500 ">
