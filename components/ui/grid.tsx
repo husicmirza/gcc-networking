@@ -104,3 +104,64 @@ export const PeopleGridItem = ({
     </div>
   );
 };
+
+export const ServiceGridItem = ({
+  className,
+  title,
+  description,
+  avatar,
+  badge,
+  date,
+  author,
+}: {
+  className?: string;
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
+  avatar: string;
+  badge?: string;
+  date?: string;
+  author: string;
+}) => {
+  return (
+    <div
+      className={cn(
+        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input bg-white border border-neutral-200 flex flex-col shadow-sm cursor-pointer",
+        className
+      )}
+    >
+      <div className="px-6 py-3 flex flex-col flex-1 justify-between">
+        <div>
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-light text-muted-foreground">
+              {date}
+            </span>
+            <Badge variant="success">{badge}</Badge>
+          </div>
+
+          <div className="mt-2">
+            <p className="font-bold font-sans text-neutral-600  hover:text-gray-700 hover:underline">
+              {title}
+            </p>
+            <p className="mt-2 font-sans font-normal text-neutral-600 text-xs">
+              {description}
+            </p>
+          </div>
+        </div>
+        <div className="mt-4">
+          <div className="flex items-center">
+            <Image
+              src={avatar}
+              width={500}
+              height={500}
+              alt="Avatar"
+              className="object-contain w-8 h-8 md:w-9 md:h-9 mr-4 rounded-full border border-neutral-200 bg-neutral-50"
+            />
+            <p className="font-bold text-neutral-700 cursor-pointer">
+              {author}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

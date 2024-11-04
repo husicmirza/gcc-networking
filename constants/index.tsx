@@ -6,6 +6,7 @@ import {
   IconHome,
   IconBlockquote,
   IconMessage,
+  IconBriefcase,
 } from "@tabler/icons-react";
 
 export const sidebarLinks = [
@@ -28,6 +29,11 @@ export const sidebarLinks = [
     label: "Companies",
     href: "/dashboard/companies",
     icon: <IconBuildings className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
+  },
+  {
+    label: "Services",
+    href: "/dashboard/services",
+    icon: <IconBriefcase className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
   },
 ];
 
@@ -130,6 +136,44 @@ export const peopleItems = [
   },
 ];
 
+export const serviceItems = [
+  {
+    title: "Accessibility tools for designers and developers",
+    description:
+      "In the heart of the bustling city, where dreams meet determination, people walk with purpose. Each face tells a unique story, etched with hopes and aspirations. Beneath the surface lies resilience, a strength unshaken by challenges abcd.",
+    avatar: "/assets/me1.png",
+    badge: "Hospitality",
+    date: "12, May, 2022",
+    author: "Mirza Husic",
+  },
+  {
+    title: "Designing with Inclusivity in Mind",
+    description:
+      "Amidst the evolving landscape of digital design, inclusivity stands as a guiding principle. Designers craft with empathy, ensuring every interface reflects the diversity of its users, embracing both function and accessibility.",
+    avatar: "/assets/me1.png",
+    badge: "Technology",
+    date: "20, August, 2022",
+    author: "Mirza Husic",
+  },
+  {
+    title: "Breaking Barriers in UX Design",
+    description:
+      "In a world driven by user experiences, barriers fade when designers prioritize usability. By merging simplicity with purpose, each interaction becomes a bridge, fostering connections that transcend screens and resonate with authenticity.",
+    avatar: "/assets/me1.png",
+    badge: "Innovation",
+    date: "15, September, 2022",
+    author: "Mirza Husic",
+  },
+  {
+    title: "The Power of Collaborative Design",
+    description:
+      "At the crossroads of creativity and collaboration, design becomes a shared journey. Every idea is a stepping stone, each perspective a catalyst, building interfaces that are as diverse as the teams behind them.",
+    avatar: "/assets/me1.png",
+    badge: "Collaboration",
+    date: "30, November, 2022",
+    author: "Mirza Husic",
+  },
+];
 export const originCountryOptions = [
   {
     value: "all",
