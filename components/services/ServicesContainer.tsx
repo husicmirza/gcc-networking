@@ -2,6 +2,7 @@ import React from "react";
 
 import FiltersWrapper from "../filters/FiltersWrapper";
 import { Grid, ServiceGridItem } from "../ui/grid";
+import { serviceItems } from "@/constants";
 
 const ServicesContainer = () => {
   return (
@@ -14,19 +15,17 @@ const ServicesContainer = () => {
       </div>
       <FiltersWrapper />
       <Grid className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-        {/* {companyItems.map((item, i) => (
-          <CompanyGridItem
+        {serviceItems.map((item, i) => (
+          <ServiceGridItem
             key={i}
             title={item.title}
             description={item.description}
-            header={item.header}
+            avatar={item.avatar}
             badge={item.badge}
+            author={item.author}
+            date={item.date}
           />
-        ))} */}
-        <ServiceGridItem />
-        <ServiceGridItem />
-        <ServiceGridItem />
-        <ServiceGridItem />
+        ))}
       </Grid>
     </div>
   );
