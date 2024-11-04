@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Badge } from "./badge";
 import { IconMapPin } from "@tabler/icons-react";
+import Image from "next/image";
 
 export const Grid = ({
   className,
@@ -31,7 +32,7 @@ export const CompanyGridItem = ({
   className?: string;
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
-  header?: React.ReactNode;
+  header: string;
   badge?: string | React.ReactNode;
 }) => {
   return (
@@ -42,7 +43,7 @@ export const CompanyGridItem = ({
       )}
     >
       <div className="flex flex-1 w-full h-full min-h-[6rem] max-h-[6rem] rounded-xl border border-neutral-200 p-2">
-        {header}
+        <Image src={header} width={1000} height={1000} alt="Gcc logo" />
       </div>
       <div className="group-hover/bento:translate-x-2 transition duration-200">
         <Badge variant="success">{badge}</Badge>
@@ -61,14 +62,16 @@ export const PeopleGridItem = ({
   className,
   title,
   description,
-  header,
+  image,
   badge,
+  location,
 }: {
   className?: string;
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
-  header?: React.ReactNode;
-  badge?: string | React.ReactNode;
+  image: string;
+  badge?: string;
+  location?: string;
 }) => {
   return (
     <div
@@ -77,27 +80,25 @@ export const PeopleGridItem = ({
         className
       )}
     >
-      <img
-        className="object-cover object-center w-full h-48 rounded-t-lg"
-        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        alt="avatar"
+      <Image
+        src={image}
+        width={500}
+        height={500}
+        alt="Gcc logo"
+        className="object-contain object-center w-full h-48 rounded-t-lg"
       />
+
       <div className="flex items-center flex-wrap gap-1 px-6 py-3 bg-neutral-100">
-        <Badge variant="success">Software and Hardware</Badge>
+        <Badge variant="success">{badge}</Badge>
       </div>
       <div className="group-hover/bento:translate-x-2 transition duration-200 px-6 py-4">
-        <h1 className="font-bold font-sans text-neutral-600">
-          Patterson Johnson
-        </h1>
-
+        <h1 className="font-bold font-sans text-neutral-600">{title}</h1>
         <p className="py-2 font-sans font-normal text-neutral-600 text-xs">
-          Full Stack maker & UI / UX Designer, love hip hop music. Author of
-          Building UI.
+          {description}
         </p>
-
         <div className="flex items-center mt-2 gap-x-2">
           <IconMapPin className="text-neutral-700 h-5 w-5 flex-shrink-0" />
-          <h1 className="text-xs text-neutral-600">Doha, Qatar</h1>
+          <h1 className="text-xs text-neutral-600">{location}</h1>
         </div>
       </div>
     </div>

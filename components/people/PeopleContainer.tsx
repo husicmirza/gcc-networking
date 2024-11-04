@@ -1,17 +1,9 @@
-"use client";
-import React, { useState } from "react";
-
-import ProfileSheetWrapper from "./ProfileSheetWrapper";
+import React from "react";
 import { Grid, PeopleGridItem } from "../ui/grid";
-import CompaniesFilters from "../companies/CompaniesFilters";
-import { useSearchParams } from "next/navigation";
+import FiltersWrapper from "../filters/FiltersWrapper";
+import { peopleItems } from "@/constants";
 
 const PeopleContainer = () => {
-  // const users = await getUsers();
-  // { searchParams }: SearchParamProps
-  // const searchParams = useSearchParams();
-
-  // const [searchTerm, setSearchTerm] = useState(searchParams.get("query") || "");
   return (
     <div className="flex space-y-8 flex-col max-w-4xl mx-auto w-full">
       <div className="border-b pb-2">
@@ -20,15 +12,19 @@ const PeopleContainer = () => {
           Here&apos;s a list of Balkan Residents in the GCC!
         </p>
       </div>
-      {/* <DataTable data={users} columns={columns} /> */}
-      {/* <CompaniesFilters searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
+      <FiltersWrapper />
       <Grid>
-        <PeopleGridItem />
-        <PeopleGridItem />
-        <PeopleGridItem />
-        <PeopleGridItem />
+        {peopleItems.map((item, i) => (
+          <PeopleGridItem
+            key={i}
+            title={item.title}
+            description={item.description}
+            image={item.image}
+            badge={item.badge}
+            location={item.location}
+          />
+        ))}
       </Grid>
-      {/* <ProfileSheetWrapper searchParams={searchParams} /> */}
     </div>
   );
 };

@@ -1,20 +1,20 @@
 "use client";
 import React, { useState } from "react";
-import CompaniesFilters from "./CompaniesFilters";
 import {
   Sheet,
   SheetContent,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import Filters from "./Filters";
 
-const CompaniesFiltersWrapper = () => {
+const FiltersWrapper = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <div>
       <div className="md:flex w-full justify-between hidden">
-        <CompaniesFilters />
+        <Filters />
       </div>
       <div className="block md:hidden">
         <Sheet open={open} onOpenChange={() => setOpen(!open)}>
@@ -23,7 +23,7 @@ const CompaniesFiltersWrapper = () => {
           </SheetTrigger>
           <SheetContent side="bottom" className="flex flex-col gap-4">
             <SheetTitle className="pb-2 border-b">Filters</SheetTitle>
-            <CompaniesFilters />
+            <Filters />
           </SheetContent>
         </Sheet>
       </div>
@@ -31,4 +31,4 @@ const CompaniesFiltersWrapper = () => {
   );
 };
 
-export default CompaniesFiltersWrapper;
+export default FiltersWrapper;

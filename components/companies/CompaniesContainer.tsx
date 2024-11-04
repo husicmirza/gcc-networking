@@ -1,7 +1,7 @@
 import React from "react";
 import { companyItems } from "@/constants";
 import { CompanyGridItem, Grid } from "../ui/grid";
-import CompaniesFiltersWrapper from "./CompaniesFiltersWrapper";
+import FiltersWrapper from "../filters/FiltersWrapper";
 
 const CompaniesContainer = () => {
   return (
@@ -12,7 +12,7 @@ const CompaniesContainer = () => {
           Here&apos;s a list of Balkan Companies in the GCC!
         </p>
       </div>
-      <CompaniesFiltersWrapper />
+      <FiltersWrapper />
       <Grid>
         {companyItems.map((item, i) => (
           <CompanyGridItem
