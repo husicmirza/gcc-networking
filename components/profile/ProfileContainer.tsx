@@ -1,8 +1,10 @@
 import React from "react";
 import ProfileHeader from "./ProfileHeader";
 import AboutProfile from "./AboutProfile";
+import { getUserInfo } from "@/lib/actions/user.actions";
 
-const ProfileContainer = ({ user }: { user: User }) => {
+const ProfileContainer = async ({ userId }: { userId: string }) => {
+  const user = await getUserInfo(userId);
   return (
     <div className="flex space-y-4 flex-col max-w-5xl mx-auto w-full">
       <ProfileHeader

@@ -70,8 +70,8 @@ const ProfileHeader = ({
               <Badge variant="success">{industry}</Badge>
             </div>
           </div>
-          {/* <div className="flex flex-col h-full justify-between gap-y-2">
-            <Link href={`/profile/${userId}/edit`}>
+          <div className="flex flex-col h-full justify-between gap-y-2">
+            <Link href={`/dashboard/profile/${userId}/edit`}>
               <Button size={"sm"}>Edit profile</Button>
             </Link>
             <div className="flex gap-x-2">
@@ -85,7 +85,7 @@ const ProfileHeader = ({
                 <IconBrandInstagram className="text-neutral-700 h-6 w-6 flex-shrink-0" />
               </Link>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </section>
