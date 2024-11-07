@@ -98,7 +98,7 @@ export const PeopleGridItem = ({
         </p>
         <div className="flex items-center mt-2 gap-x-2">
           <IconMapPin className="text-neutral-700 h-5 w-5 flex-shrink-0" />
-          <h1 className="text-xs text-neutral-600">{location}</h1>
+          <p className="text-xs text-neutral-600">{location}</p>
         </div>
       </div>
     </div>

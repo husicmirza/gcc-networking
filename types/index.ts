@@ -27,6 +27,15 @@ declare type User = {
   country: string;
   zipCode: string;
   phone: string;
+  occupation: string;
+  company: string;
+  industry: string;
+  linkedin: string;
+  instagram: string;
+  facebook: string;
+  cityOfOrigin: string;
+  countryOfOrigin: string;
+  image: string;
 };
 declare type Author = {
   name: string;

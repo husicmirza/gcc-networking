@@ -8,26 +8,22 @@ import { redirect } from "next/navigation";
 
 const { DATABASE_ID, USER_COLLECTION_ID } = process.env;
 
-export const getUserInfo = async ({ userId }: { userId?: string }) => {
-  if (!userId) return null;
-
+export const getUserInfo = async (userId: string) => {
   try {
     const { database } = await createAdminClient();
 
     const user = await database.listDocuments(
       DATABASE_ID!,
       USER_COLLECTION_ID!,
-      [Query.equal("$id", [userId])]
+      [Query.equal("userId", [userId])]
     );
-
-    if (!user.documents.length) return null;
-
     return parseStringify(user.documents[0]);
   } catch (error) {
     console.log(error);
     return null;
   }
 };
+
 export const logIn = async ({
   email,
   password,
@@ -97,7 +93,6 @@ export const getLoggedInUser = async () => {
     const { database } = await createAdminClient();
     const { account } = await createSessionClient();
     const result = await account.get();
-
     const user = await database.listDocuments(
       DATABASE_ID!,
       USER_COLLECTION_ID!,
@@ -121,7 +116,6 @@ export const logoutUser = async () => {
     return null;
   }
   redirect("/login");
-
 };
 
 export const getUsers = async () => {
@@ -136,5 +130,4 @@ export const getUsers = async () => {
     console.log(error);
     return null;
   }
-
 };

@@ -8,11 +8,14 @@ import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
 import Image from "next/image";
 import { sidebarLinks } from "@/constants";
 import DashboardFooter from "./DashboardFooter";
+import { IconUserBolt } from "@tabler/icons-react";
 
 const DashboardSidebar = ({
   children,
+  user,
 }: Readonly<{
   children: React.ReactNode;
+  user: User;
 }>) => {
   const [open, setOpen] = useState(false);
 
@@ -27,11 +30,21 @@ const DashboardSidebar = ({
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
             {open ? <Logo /> : <LogoIcon />}
             <div className="mt-8 flex flex-col gap-2">
+              <SidebarLink
+                link={{
+                  label: "Profile",
+                  href: `/dashboard/profile/${user.userId}`,
+                  icon: (
+                    <IconUserBolt className="text-neutral-700 h-5 w-5 flex-shrink-0" />
+                  ),
+                }}
+              />
               {sidebarLinks.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
               ))}
             </div>
           </div>
+
           <DashboardFooter />
         </SidebarBody>
       </Sidebar>
