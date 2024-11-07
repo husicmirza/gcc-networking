@@ -7,6 +7,7 @@ import {
   IconBrandLinkedin,
   IconMapPin,
 } from "@tabler/icons-react";
+import { Button } from "../ui/button";
 
 const ProfileHeader = () => {
   return (
@@ -46,10 +47,13 @@ const ProfileHeader = () => {
               <Badge variant="success">Information Technology/IT</Badge>
             </div>
           </div>
-          <div className="flex gap-x-2">
-            <IconBrandLinkedin className="text-neutral-700 h-6 w-6 flex-shrink-0" />
-            <IconBrandFacebook className="text-neutral-700 h-6 w-6 flex-shrink-0" />
-            <IconBrandInstagram className="text-neutral-700 h-6 w-6 flex-shrink-0" />
+          <div className="flex flex-col h-full justify-between gap-y-2">
+            <Button size={"sm"}>Edit profile</Button>
+            <div className="flex gap-x-2">
+              <IconBrandLinkedin className="text-neutral-700 h-6 w-6 flex-shrink-0" />
+              <IconBrandFacebook className="text-neutral-700 h-6 w-6 flex-shrink-0" />
+              <IconBrandInstagram className="text-neutral-700 h-6 w-6 flex-shrink-0" />
+            </div>
           </div>
         </div>
       </div>
