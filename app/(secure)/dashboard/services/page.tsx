@@ -1,7 +1,5 @@
 import ServicesContainer from "@/components/services/ServicesContainer";
 
-const ServicesPage = () => {
+export default async function ServicesPage() {
   return <ServicesContainer />;
-};
-
-export default ServicesPage;
+}
