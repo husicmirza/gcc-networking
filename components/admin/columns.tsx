@@ -1,7 +1,8 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "../ui/button";
-import Link from "next/link";
+
+import { IconCheck, IconX } from "@tabler/icons-react";
+import { User } from "@/types";
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -42,12 +43,13 @@ export const columns: ColumnDef<User>[] = [
     id: "action",
     header: "Action",
     cell: ({ row }) => {
-      const id = row.original.$id;
+      // const id = row.original.$id;
 
       return (
-        <Link href={`?id=${id}`}>
-          <Button size="sm">View</Button>
-        </Link>
+        <div className="flex gap-1">
+          <IconX className="text-destructive" />
+          <IconCheck className="text-success" />
+        </div>
       );
     },
   },
