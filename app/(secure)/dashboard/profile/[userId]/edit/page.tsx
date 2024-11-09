@@ -1,8 +1,8 @@
-import EditProfileForm from "@/components/profile/EditProfileForm";
+import EditProfileContainer from "@/components/profile/EditProfileContainer";
 import React from "react";
 
-const EditProfilePage = () => {
-  return <EditProfileForm />;
+const EditProfilePage = async ({ params: { userId } }: SearchParamProps) => {
+  return <EditProfileContainer userId={userId} />;
 };
 
 export default EditProfilePage;

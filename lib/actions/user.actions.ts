@@ -5,6 +5,8 @@ import { createAdminClient, createSessionClient } from "../appwrite.config";
 import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
 import { redirect } from "next/navigation";
+import { EditProfileDataFormType } from "../validation";
+import { SignUpParams } from "@/types";
 
 const { DATABASE_ID, USER_COLLECTION_ID } = process.env;
 
@@ -126,6 +128,26 @@ export const getUsers = async () => {
       USER_COLLECTION_ID!
     );
     return parseStringify(users.documents);
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const updateUserInfo = async (
+  userId: string,
+  userData: EditProfileDataFormType
+) => {
+  try {
+    const { database } = await createAdminClient();
+
+    const user = await database.updateDocument(
+      DATABASE_ID!,
+      USER_COLLECTION_ID!,
+      userId,
+      userData
+    );
+    return parseStringify(user);
   } catch (error) {
     console.log(error);
     return null;

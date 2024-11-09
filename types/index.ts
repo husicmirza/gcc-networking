@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-declare type SignUpParams = {
+import { Models } from "node-appwrite";
+
+export type SignUpParams = {
   firstName: string;
   lastName: string;
   address1: string;
@@ -13,20 +15,21 @@ declare type SignUpParams = {
   password: string;
 };
 
-declare type User = {
-  $id: string;
+export interface User extends Models.Document {
   userId: string;
   email: string;
   firstName: string;
   lastName: string;
   state: string;
-  postalCode: string;
   dateOfBirth: string;
   address1: string;
   city: string;
   country: string;
   zipCode: string;
   phone: string;
+}
+
+export interface ExtendedUser extends User {
   occupation: string;
   company: string;
   industry: string;
@@ -36,7 +39,8 @@ declare type User = {
   cityOfOrigin: string;
   countryOfOrigin: string;
   image: string;
-};
+}
+
 declare type Author = {
   name: string;
   picture: string;
