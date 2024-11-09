@@ -1,14 +1,9 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { DataTable } from "../core/DataTable";
 import { getUsers } from "@/lib/actions/user.actions";
 import { columns } from "./columns";
-import ProfileModalWrapper from "./ProfileModalWrapper";
 
-const AdminPanel = async ({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) => {
+const AdminPanel = async () => {
   const users = await getUsers();
   return (
     <div className="flex space-y-8 flex-col max-w-5xl mx-auto w-full">
@@ -19,9 +14,6 @@ const AdminPanel = async ({
       {/* <FiltersWrapper /> */}
       {/* //TODO: Implement filters with search and status filter */}
       <DataTable data={users} columns={columns} />
-      <Suspense fallback={<div>Loading...</div>}>
-        <ProfileModalWrapper searchParams={searchParams} />
-      </Suspense>
     </div>
   );
 };

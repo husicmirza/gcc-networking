@@ -60,30 +60,38 @@ const ProfileHeader = ({
               {fullName}
             </h1>
             <p className=" text-neutral-500 ">
-              {occupation} - {company}
+              {occupation && occupation} - {company && company}
             </p>
             <div className="flex items-center gap-x-2">
               <IconMapPin className="text-neutral-700 h-5 w-5 flex-shrink-0" />
               <h1 className="text-sm text-neutral-600">{location}</h1>
             </div>
-            <div>
-              <Badge variant="success">{industry}</Badge>
-            </div>
+            {industry && (
+              <div>
+                <Badge variant="success">{industry}</Badge>
+              </div>
+            )}
           </div>
           <div className="flex flex-col h-full justify-between gap-y-2">
             <Link href={`/dashboard/profile/${userId}/edit`}>
               <Button size={"sm"}>Edit profile</Button>
             </Link>
             <div className="flex gap-x-2">
-              <Link href={linkedin} target="_blank">
-                <IconBrandLinkedin className="text-neutral-700 h-6 w-6 flex-shrink-0" />
-              </Link>
-              <Link href={facebook} target="_blank">
-                <IconBrandFacebook className="text-neutral-700 h-6 w-6 flex-shrink-0" />
-              </Link>
-              <Link href={instagram} target="_blank">
-                <IconBrandInstagram className="text-neutral-700 h-6 w-6 flex-shrink-0" />
-              </Link>
+              {linkedin && (
+                <Link href={linkedin} target="_blank">
+                  <IconBrandLinkedin className="text-neutral-700 h-6 w-6 flex-shrink-0" />
+                </Link>
+              )}
+              {facebook && (
+                <Link href={facebook} target="_blank">
+                  <IconBrandFacebook className="text-neutral-700 h-6 w-6 flex-shrink-0" />
+                </Link>
+              )}
+              {instagram && (
+                <Link href={instagram} target="_blank">
+                  <IconBrandInstagram className="text-neutral-700 h-6 w-6 flex-shrink-0" />
+                </Link>
+              )}
             </div>
           </div>
         </div>

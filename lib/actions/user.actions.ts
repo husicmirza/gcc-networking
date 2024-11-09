@@ -1,12 +1,14 @@
 "use server";
 
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { createAdminClient, createSessionClient } from "../appwrite.config";
 import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
 import { redirect } from "next/navigation";
 import { EditProfileDataFormType } from "../validation";
 import { SignUpParams } from "@/types";
+import { unstable_noStore as noStore } from "next/cache";
+// import { connection } from "next/server";
 
 const { DATABASE_ID, USER_COLLECTION_ID } = process.env;
 
@@ -14,6 +16,8 @@ export const getUserInfo = async (userId: string) => {
   if (!userId) {
     return null;
   }
+  noStore();
+  // await connection() TODO: replace noStore with this after update to Next 15
   try {
     const { database } = await createAdminClient();
     const user = await database.listDocuments(
@@ -93,6 +97,7 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
 };
 
 export const getLoggedInUser = async () => {
+  noStore();
   try {
     const { database } = await createAdminClient();
     const { account } = await createSessionClient();
@@ -123,6 +128,7 @@ export const logoutUser = async () => {
 };
 
 export const getUsers = async () => {
+  noStore();
   try {
     const { database } = await createAdminClient();
     const users = await database.listDocuments(

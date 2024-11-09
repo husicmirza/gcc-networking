@@ -3,8 +3,8 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { User } from "@/types";
-import Link from "next/link";
-import { Button } from "../ui/button";
+
+import ProfileModal from "./ProfileModal";
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -45,13 +45,8 @@ export const columns: ColumnDef<User>[] = [
     id: "view",
     header: "View Profile",
     cell: ({ row }) => {
-      const id = row.original.userId;
-
-      return (
-        <Link href={`?id=${id}`}>
-          <Button size="sm">View</Button>
-        </Link>
-      );
+      const user = row.original;
+      return <ProfileModal user={user} />;
     },
   },
   {
