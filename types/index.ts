@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { Models } from "node-appwrite";
+export type Status = "created" | "pending" | "approved" | "cancelled";
 
 export type SignUpParams = {
   firstName: string;
@@ -27,6 +28,7 @@ export interface User extends Models.Document {
   country: string;
   zipCode: string;
   phone: string;
+  status: Status;
 }
 
 export interface ExtendedUser extends User {

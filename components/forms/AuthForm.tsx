@@ -54,7 +54,7 @@ const AuthForm = ({ type }: { type: string }) => {
           password: data.password,
         });
       }
-
+      //TODO: rediret to edit profile on create, redirect to home on login. Add toast for create
       if (user) {
         router.push("/");
       } else {

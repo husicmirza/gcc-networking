@@ -20,6 +20,7 @@ const EditProfileForm = ({ user }: { user: User }) => {
     resolver: zodResolver(editProfileSchema),
     defaultValues: {
       ...user,
+      status: "pending",
     },
   });
 

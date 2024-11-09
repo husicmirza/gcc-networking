@@ -42,6 +42,12 @@ export const authFormSchema = (type: string) =>
               (phone) => /^\+\d{10,15}$/.test(phone),
               "Invalid phone number"
             ),
+    status:
+      type === "login"
+        ? z.string().optional()
+        : z
+            .enum(["created", "pending", "approved", "cancelled"])
+            .default("created"),
     email: z.string().email("Invalid email address"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
   });
@@ -61,6 +67,7 @@ export const editProfileSchema = z.object({
     .string()
     .refine((phone) => /^\+\d{10,15}$/.test(phone), "Invalid phone number"),
   email: z.string().email("Invalid email address"),
+  status: z.enum(["created", "pending", "approved", "cancelled"]),
 });
 
 export type EditProfileDataFormType = z.infer<typeof editProfileSchema>;
