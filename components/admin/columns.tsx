@@ -3,6 +3,8 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { User } from "@/types";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -40,9 +42,22 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
+    id: "view",
+    header: "View Profile",
+    cell: ({ row }) => {
+      const id = row.original.userId;
+
+      return (
+        <Link href={`?id=${id}`}>
+          <Button size="sm">View</Button>
+        </Link>
+      );
+    },
+  },
+  {
     id: "action",
     header: "Action",
-    cell: ({ row }) => {
+    cell: () => {
       // const id = row.original.$id;
 
       return (

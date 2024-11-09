@@ -1,6 +1,6 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { createAdminClient, createSessionClient } from "../appwrite.config";
 import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
@@ -11,9 +11,11 @@ import { SignUpParams } from "@/types";
 const { DATABASE_ID, USER_COLLECTION_ID } = process.env;
 
 export const getUserInfo = async (userId: string) => {
+  if (!userId) {
+    return null;
+  }
   try {
     const { database } = await createAdminClient();
-
     const user = await database.listDocuments(
       DATABASE_ID!,
       USER_COLLECTION_ID!,
