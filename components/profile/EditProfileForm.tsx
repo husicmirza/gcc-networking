@@ -9,9 +9,9 @@ import { useToast } from "@/hooks/use-toast";
 import CustomFormField, { FormFieldType } from "../forms/CustomFormField";
 import { Separator } from "../ui/separator";
 import { updateUserInfo } from "@/lib/actions/user.actions";
-import { User } from "@/types";
 import { Button } from "../ui/button";
 import { IconLoader } from "@tabler/icons-react";
+import { User } from "@/types/appwrite.types";
 const EditProfileForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState(false);
   // const router = useRouter();
@@ -27,7 +27,10 @@ const EditProfileForm = ({ user }: { user: User }) => {
   const onSubmit = async (data: EditProfileDataFormType) => {
     setIsLoading(true);
     try {
-      const updatedUser = await updateUserInfo(user.$id, data);
+      const updatedUser = await updateUserInfo({
+        userId: user.$id,
+        userData: data,
+      });
 
       if (updatedUser) {
         toast({

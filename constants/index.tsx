@@ -188,6 +188,10 @@ export const originCountryOptions = [
     value: "Slovenia",
     label: "Slovenia",
   },
+  {
+    value: "Other",
+    label: "Other",
+  },
 ];
 export const countryOptions = [
   {
@@ -217,6 +221,10 @@ export const countryOptions = [
   {
     value: "United Arab Emirates",
     label: "United Arab Emirates",
+  },
+  {
+    value: "Other",
+    label: "Other",
   },
 ];
 

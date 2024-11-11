@@ -5,8 +5,6 @@ import { createAdminClient, createSessionClient } from "../appwrite.config";
 import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
 import { redirect } from "next/navigation";
-import { EditProfileDataFormType } from "../validation";
-import { SignUpParams } from "@/types";
 import { unstable_noStore as noStore } from "next/cache";
 // import { connection } from "next/server";
 
@@ -142,10 +140,10 @@ export const getUsers = async () => {
   }
 };
 
-export const updateUserInfo = async (
-  userId: string,
-  userData: EditProfileDataFormType
-) => {
+export const updateUserInfo = async ({
+  userId,
+  userData,
+}: UpdateUserInfoParams) => {
   try {
     const { database } = await createAdminClient();
 
