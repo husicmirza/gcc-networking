@@ -2,9 +2,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import { IconCheck, IconX } from "@tabler/icons-react";
-import { User } from "@/types";
 
 import ProfileModal from "./ProfileModal";
+import { User } from "@/types/appwrite.types";
 
 export const columns: ColumnDef<User>[] = [
   {

@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 
-import { User } from "@/types";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +11,9 @@ import ProfileHeader from "../profile/ProfileHeader";
 import AboutProfile from "../profile/AboutProfile";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { Button } from "../ui/button";
-const ProfileModal = ({ user }: { user: User | undefined }) => {
+import { User } from "@/types/appwrite.types";
+
+const ProfileModal = ({ user }: { user: User }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,23 +24,21 @@ const ProfileModal = ({ user }: { user: User | undefined }) => {
       <DialogContent className="sm:max-w-4xl bg-neutral-50 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-lg font-semibold text-neutral-700">
-            Preview {user?.firstName} {user?.lastName} Profile
+            Preview {user.firstName} {user.lastName} Profile
           </DialogTitle>
         </DialogHeader>
-        {user && (
-          <ProfileHeader
-            imageSrc={user.image}
-            fullName={`${user.firstName} ${user.lastName}`}
-            occupation={user.occupation}
-            company={user.company}
-            location={`${user.city}, ${user.country}`}
-            industry={user.industry}
-            userId={user.userId}
-            linkedin={user.linkedin as string}
-            facebook={user.facebook as string}
-            instagram={user.instagram as string}
-          />
-        )}
+        <ProfileHeader
+          imageSrc={user.image}
+          fullName={`${user.firstName} ${user.lastName}`}
+          occupation={user.occupation}
+          company={user.company}
+          location={`${user.city}, ${user.country}`}
+          industry={user.industry}
+          userId={user.userId}
+          linkedin={user.linkedin as string}
+          facebook={user.facebook as string}
+          instagram={user.instagram as string}
+        />
         <AboutProfile />
       </DialogContent>
     </Dialog>
