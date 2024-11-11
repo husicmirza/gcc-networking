@@ -5,7 +5,6 @@ export interface User extends Models.Document {
   email: string;
   firstName: string;
   lastName: string;
-  state: string;
   dateOfBirth: string;
   address1: string;
   city: string;

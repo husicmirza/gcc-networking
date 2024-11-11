@@ -8,7 +8,8 @@ import { redirect } from "next/navigation";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 // import { connection } from "next/server";
 
-const { DATABASE_ID, USER_COLLECTION_ID } = process.env;
+const { DATABASE_ID, USERS_COLLECTION_ID, PUBLIC_USERS_COLLECTION_ID } =
+  process.env;
 
 export const getUserInfo = async (userId: string) => {
   if (!userId) {
@@ -18,11 +19,20 @@ export const getUserInfo = async (userId: string) => {
   // await connection() TODO: replace noStore with this after update to Next 15
   try {
     const { database } = await createAdminClient();
-    const user = await database.listDocuments(
-      DATABASE_ID!,
-      USER_COLLECTION_ID!,
-      [Query.equal("userId", [userId])]
-    );
+    const currentUser = await getCurrentUser();
+    if (!currentUser) throw new Error("User is not authenticated.");
+    const isOwnProfile = userId === currentUser.userId;
+
+    const user = isOwnProfile
+      ? await database.listDocuments(DATABASE_ID!, USERS_COLLECTION_ID!, [
+          Query.equal("userId", [userId]),
+        ])
+      : await database.listDocuments(
+          DATABASE_ID!,
+          PUBLIC_USERS_COLLECTION_ID!,
+          [Query.equal("userId", [userId])]
+        );
+    if (user.total <= 0) throw new Error("User is not found.");
     return parseStringify(user.documents[0]);
   } catch (error) {
     console.log(error);
@@ -71,7 +81,7 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
 
     const newUser = await database.createDocument(
       DATABASE_ID!,
-      USER_COLLECTION_ID!,
+      USERS_COLLECTION_ID!,
       ID.unique(),
       {
         userId: newUserAccount.$id,
@@ -94,17 +104,17 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
   }
 };
 
-export const getLoggedInUser = async () => {
+export const getCurrentUser = async () => {
   noStore();
   try {
-    const { database } = await createAdminClient();
-    const { account } = await createSessionClient();
+    const { account, database } = await createSessionClient();
     const result = await account.get();
     const user = await database.listDocuments(
       DATABASE_ID!,
-      USER_COLLECTION_ID!,
+      USERS_COLLECTION_ID!,
       [Query.equal("userId", [result.$id])]
     );
+    if (user.total <= 0) return null;
 
     return parseStringify(user.documents[0]);
   } catch (error) {
@@ -142,7 +152,7 @@ export const getUsers = async (searchParams?: {
 
     const users = await database.listDocuments(
       DATABASE_ID!,
-      USER_COLLECTION_ID!,
+      USERS_COLLECTION_ID!,
       queries
     );
     return parseStringify(users.documents);
@@ -161,7 +171,7 @@ export const updateUserInfo = async ({
 
     const user = await database.updateDocument(
       DATABASE_ID!,
-      USER_COLLECTION_ID!,
+      USERS_COLLECTION_ID!,
       userId,
       userData
     );

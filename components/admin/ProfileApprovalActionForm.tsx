@@ -12,6 +12,7 @@ import { Button } from "../ui/button";
 import { IconLoader } from "@tabler/icons-react";
 import { updateUserInfo } from "@/lib/actions/user.actions";
 import { toast } from "@/hooks/use-toast";
+import { createPublicUser } from "@/lib/actions/publicUsers.actions";
 
 const ProfileApprovalActionForm = ({
   user,
@@ -43,13 +44,17 @@ const ProfileApprovalActionForm = ({
         userId: user.$id,
         userData: userData,
       });
-
+      console.log(updatedUser);
       if (updatedUser) {
-        toast({
-          variant: "success",
-          title: "Updated!",
-          description: "Successfully updated profile.",
+        const createdPublicUser = await createPublicUser({
+          userData: updatedUser,
         });
+        if (createdPublicUser)
+          toast({
+            variant: "success",
+            title: "Updated!",
+            description: "Successfully updated profile.",
+          });
         setOpen && setOpen(false);
         form.reset();
       } else {
