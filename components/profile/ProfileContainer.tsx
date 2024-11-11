@@ -2,11 +2,16 @@ import React from "react";
 import ProfileHeader from "./ProfileHeader";
 import AboutProfile from "./AboutProfile";
 import { getUserInfo } from "@/lib/actions/user.actions";
+import ProfileAlert from "./ProfileAlert";
 
 const ProfileContainer = async ({ userId }: { userId: string }) => {
   const user = await getUserInfo(userId);
   return (
     <div className="flex space-y-4 flex-col max-w-5xl mx-auto w-full">
+      <ProfileAlert
+        status={user.status}
+        cancellationReason={user.cancellationReason}
+      />
       <ProfileHeader
         imageSrc={user.image}
         fullName={`${user.firstName} ${user.lastName}`}
