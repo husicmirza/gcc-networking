@@ -1,10 +1,8 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-
-import { IconCheck, IconX } from "@tabler/icons-react";
-
 import ProfileModal from "./ProfileModal";
 import { User } from "@/types/appwrite.types";
+import ProfileApprovalActionModal from "./ProfileApprovalActionModal";
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -52,13 +50,13 @@ export const columns: ColumnDef<User>[] = [
   {
     id: "action",
     header: "Action",
-    cell: () => {
-      // const id = row.original.$id;
+    cell: ({ row }) => {
+      const user = row.original;
 
       return (
-        <div className="flex gap-1">
-          <IconX className="text-destructive" />
-          <IconCheck className="text-success" />
+        <div className="flex gap-x-3">
+          <ProfileApprovalActionModal type="cancel" user={user} />
+          <ProfileApprovalActionModal type="approve" user={user} />
         </div>
       );
     },

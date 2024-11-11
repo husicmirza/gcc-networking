@@ -71,3 +71,11 @@ export const editProfileSchema = z.object({
 });
 
 export type EditProfileDataFormType = z.infer<typeof editProfileSchema>;
+
+export const profileApprovalActionFormSchema = (type: string) =>
+  z.object({
+    cancellationReason:
+      type === "approve"
+        ? z.string().optional()
+        : z.string().min(2, "Please enter a cancellation reason"),
+  });
