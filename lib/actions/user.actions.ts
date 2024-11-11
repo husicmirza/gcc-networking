@@ -5,7 +5,7 @@ import { createAdminClient, createSessionClient } from "../appwrite.config";
 import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
 import { redirect } from "next/navigation";
-import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 // import { connection } from "next/server";
 
 const { DATABASE_ID, USER_COLLECTION_ID } = process.env;
@@ -125,13 +125,25 @@ export const logoutUser = async () => {
   redirect("/login");
 };
 
-export const getUsers = async () => {
+export const getUsers = async (searchParams?: {
+  [key: string]: string | string[] | undefined;
+}) => {
   noStore();
+
   try {
     const { database } = await createAdminClient();
+
+    const queries = [];
+    if (searchParams?.status && searchParams.status !== "all")
+      queries.push(Query.equal("status", searchParams.status as string));
+
+    if (searchParams?.query)
+      queries.push(Query.contains("firstName", searchParams.query as string));
+
     const users = await database.listDocuments(
       DATABASE_ID!,
-      USER_COLLECTION_ID!
+      USER_COLLECTION_ID!,
+      queries
     );
     return parseStringify(users.documents);
   } catch (error) {
@@ -153,6 +165,7 @@ export const updateUserInfo = async ({
       userId,
       userData
     );
+    revalidatePath("/dashboard");
     return parseStringify(user);
   } catch (error) {
     console.log(error);

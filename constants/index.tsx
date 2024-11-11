@@ -5,15 +5,15 @@ import {
   IconBlockquote,
   IconMessage,
   IconBriefcase,
+  IconDashboard,
 } from "@tabler/icons-react";
 
 export const sidebarLinks = [
-  // {
-  //   label: "Dashboard",
-  //   href: "/dashboard",
-  //   icon: <IconDashboard className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
-  // },
-
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: <IconDashboard className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
+  },
   {
     label: "People",
     href: "/dashboard/people",
@@ -820,5 +820,28 @@ export const industryOptions = [
   {
     label: "Writing/Editing",
     value: "Writing/Editing",
+  },
+];
+
+export const statusOptions = [
+  {
+    value: "all",
+    label: "All",
+  },
+  {
+    value: "created",
+    label: "Created",
+  },
+  {
+    value: "pending",
+    label: "Pending",
+  },
+  {
+    value: "approved",
+    label: "Approved",
+  },
+  {
+    value: "cancelled",
+    label: "Cancelled",
   },
 ];

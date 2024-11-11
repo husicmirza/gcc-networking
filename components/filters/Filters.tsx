@@ -17,7 +17,7 @@ import {
   originCountryOptions,
 } from "@/constants";
 
-const CompaniesFilters = () => {
+const Filters = () => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -169,4 +169,4 @@ const CompaniesFilters = () => {
   );
 };
 
-export default CompaniesFilters;
+export default Filters;
