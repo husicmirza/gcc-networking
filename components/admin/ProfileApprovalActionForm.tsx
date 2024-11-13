@@ -12,7 +12,10 @@ import { Button } from "../ui/button";
 import { IconLoader } from "@tabler/icons-react";
 import { updateUserInfo } from "@/lib/actions/user.actions";
 import { toast } from "@/hooks/use-toast";
-import { createPublicUser } from "@/lib/actions/publicUsers.actions";
+import {
+  createPublicUser,
+  updatePublicUserInfo,
+} from "@/lib/actions/publicUsers.actions";
 
 const ProfileApprovalActionForm = ({
   user,
@@ -36,33 +39,42 @@ const ProfileApprovalActionForm = ({
   ) => {
     setIsLoading(true);
     try {
+      const status = type === "approve" ? "approved" : "cancelled";
       const userData = {
         cancellationReason: data.cancellationReason,
-        status: type === "approve" ? "approved" : "cancelled",
+        status: status,
       };
+
       const updatedUser = await updateUserInfo({
         userId: user.$id,
         userData: userData,
       });
-      console.log(updatedUser);
-      if (updatedUser) {
-        const createdPublicUser = await createPublicUser({
-          userData: updatedUser,
-        });
-        if (createdPublicUser)
-          toast({
-            variant: "success",
-            title: "Updated!",
-            description: "Successfully updated profile.",
-          });
-        setOpen && setOpen(false);
-        form.reset();
-      } else {
+
+      if (!updatedUser) {
         toast({
           variant: "destructive",
           title: "Something went wrong!",
           description: "Please try again.",
         });
+        return;
+      }
+      const publicUserId = updatedUser.publicUser?.$id;
+      console.log(publicUserId);
+      const publicUser = publicUserId
+        ? await updatePublicUserInfo({
+            userId: publicUserId,
+            userData: updatedUser,
+          })
+        : await createPublicUser({ userData: updatedUser });
+
+      if (publicUser) {
+        toast({
+          variant: "success",
+          title: "Updated!",
+          description: "Successfully updated profile.",
+        });
+        setOpen && setOpen(false);
+        form.reset();
       }
     } catch (error) {
       console.log(error);
