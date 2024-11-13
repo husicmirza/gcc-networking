@@ -1,9 +1,16 @@
 import React from "react";
 import { Grid, PeopleGridItem } from "../ui/grid";
 import FiltersWrapper from "../filters/FiltersWrapper";
-import { peopleItems } from "@/constants";
+import { getPublicUsers } from "@/lib/actions/publicUsers.actions";
+import { User } from "@/types/appwrite.types";
 
-const PeopleContainer = () => {
+const PeopleContainer = async ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) => {
+  const users = await getPublicUsers(searchParams);
+
   return (
     <div className="flex space-y-8 flex-col max-w-5xl mx-auto w-full">
       <div className="border-b pb-2">
@@ -14,16 +21,21 @@ const PeopleContainer = () => {
       </div>
       <FiltersWrapper />
       <Grid>
-        {peopleItems.map((item, i) => (
-          <PeopleGridItem
-            key={i}
-            title={item.title}
-            description={item.description}
-            image={item.image}
-            badge={item.badge}
-            location={item.location}
-          />
-        ))}
+        {users.length > 0 &&
+          users
+            .filter((user: User) => user.status === "approved")
+            .map((user: User) => (
+              <PeopleGridItem
+                key={user.$id}
+                userId={user.userId}
+                fullName={`${user.firstName} ${user.lastName}`}
+                ocupation={user.occupation}
+                company={user.company}
+                image={user.image}
+                industry={user.industry}
+                location={`${user.city}, ${user.country}`}
+              />
+            ))}
       </Grid>
     </div>
   );

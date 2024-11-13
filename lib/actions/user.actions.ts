@@ -148,7 +148,12 @@ export const getUsers = async (searchParams?: {
       queries.push(Query.equal("status", searchParams.status as string));
 
     if (searchParams?.query)
-      queries.push(Query.contains("firstName", searchParams.query as string));
+      queries.push(
+        Query.or([
+          Query.contains("firstName", searchParams.query as string),
+          Query.contains("lastName", searchParams.query as string),
+        ])
+      );
 
     const users = await database.listDocuments(
       DATABASE_ID!,

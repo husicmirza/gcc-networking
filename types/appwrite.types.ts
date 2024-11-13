@@ -21,5 +21,6 @@ export interface User extends Models.Document {
   cityOfOrigin: string;
   countryOfOrigin: string;
   image: string;
+  occupation: string;
   publicUser: User;
 }

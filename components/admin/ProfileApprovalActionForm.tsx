@@ -59,7 +59,6 @@ const ProfileApprovalActionForm = ({
         return;
       }
       const publicUserId = updatedUser.publicUser?.$id;
-      console.log(publicUserId);
       const publicUser = publicUserId
         ? await updatePublicUserInfo({
             userId: publicUserId,

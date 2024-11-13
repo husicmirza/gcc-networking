@@ -2,6 +2,8 @@ import { cn } from "@/lib/utils";
 import { Badge } from "./badge";
 import { IconMapPin } from "@tabler/icons-react";
 import Image from "next/image";
+import ImageWithFallback from "../core/ImageWithFallback";
+import Link from "next/link";
 
 export const Grid = ({
   className,
@@ -60,48 +62,54 @@ export const CompanyGridItem = ({
 
 export const PeopleGridItem = ({
   className,
-  title,
-  description,
+  fullName,
+  userId,
+  ocupation,
+  company,
   image,
-  badge,
+  industry,
   location,
 }: {
   className?: string;
-  title?: string | React.ReactNode;
-  description?: string | React.ReactNode;
+  fullName?: string | React.ReactNode;
+  userId: string;
+  ocupation?: string | React.ReactNode;
+  company?: string | React.ReactNode;
   image: string;
-  badge?: string;
+  industry?: string;
   location?: string;
 }) => {
   return (
-    <div
-      className={cn(
-        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input bg-white border border-neutral-200 flex flex-col shadow-sm cursor-pointer",
-        className
-      )}
-    >
-      <Image
-        src={image}
-        width={500}
-        height={500}
-        alt="Gcc logo"
-        className="object-contain object-center w-full h-48 rounded-t-lg"
-      />
+    <Link href={`/dashboard/profile/${userId}`}>
+      <div
+        className={cn(
+          "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input bg-white border border-neutral-200 flex flex-col shadow-sm cursor-pointer",
+          className
+        )}
+      >
+        <ImageWithFallback
+          src={image}
+          width={500}
+          height={500}
+          alt="Gcc logo"
+          className="object-contain object-center w-full h-48 rounded-t-lg"
+        />
 
-      <div className="flex items-center flex-wrap gap-1 px-6 py-3 bg-neutral-100">
-        <Badge variant="success">{badge}</Badge>
-      </div>
-      <div className="group-hover/bento:translate-x-2 transition duration-200 px-6 py-4">
-        <h1 className="font-bold font-sans text-neutral-600">{title}</h1>
-        <p className="py-2 font-sans font-normal text-neutral-600 text-xs">
-          {description}
-        </p>
-        <div className="flex items-center mt-2 gap-x-2">
-          <IconMapPin className="text-neutral-700 h-5 w-5 flex-shrink-0" />
-          <p className="text-xs text-neutral-600">{location}</p>
+        <div className="flex items-center flex-wrap gap-1 px-6 py-3 bg-neutral-100">
+          <Badge variant="success">{industry}</Badge>
+        </div>
+        <div className="group-hover/bento:translate-x-2 transition duration-200 px-6 py-4">
+          <h1 className="font-bold font-sans text-neutral-600">{fullName}</h1>
+          <p className="py-2 font-sans font-normal text-neutral-600 text-xs">
+            {ocupation} at {company}
+          </p>
+          <div className="flex items-center mt-2 gap-x-2">
+            <IconMapPin className="text-neutral-700 h-5 w-5 flex-shrink-0" />
+            <p className="text-xs text-neutral-600">{location}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

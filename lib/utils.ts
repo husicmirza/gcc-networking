@@ -33,5 +33,6 @@ export const formatUserData = (userData: User) => ({
   cityOfOrigin: userData.cityOfOrigin ?? "",
   countryOfOrigin: userData.countryOfOrigin ?? "",
   image: userData.image ?? "",
+  occupation: userData.occupation ?? "",
   user: userData.$id ?? "",
 });
