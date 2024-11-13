@@ -9,6 +9,7 @@ import Image from "next/image";
 import { sidebarLinks } from "@/constants";
 import DashboardFooter from "./DashboardFooter";
 import { IconUserBolt } from "@tabler/icons-react";
+import { User } from "@/types/appwrite.types";
 
 const DashboardSidebar = ({
   children,

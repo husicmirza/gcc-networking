@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/footer/Footer";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import { navItems } from "@/constants";
-import { getLoggedInUser } from "@/lib/actions/user.actions";
+import { getCurrentUser } from "@/lib/actions/user.actions";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -14,7 +14,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getLoggedInUser();
+  const user = await getCurrentUser();
 
   return (
     <main className="flex flex-col min-h-screen">

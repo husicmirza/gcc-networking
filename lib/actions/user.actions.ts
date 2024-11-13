@@ -5,18 +5,34 @@ import { createAdminClient, createSessionClient } from "../appwrite.config";
 import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
 import { redirect } from "next/navigation";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
+// import { connection } from "next/server";
 
-const { DATABASE_ID, USER_COLLECTION_ID } = process.env;
+const { DATABASE_ID, USERS_COLLECTION_ID, PUBLIC_USERS_COLLECTION_ID } =
+  process.env;
 
 export const getUserInfo = async (userId: string) => {
+  if (!userId) {
+    return null;
+  }
+  noStore();
+  // await connection() TODO: replace noStore with this after update to Next 15
   try {
     const { database } = await createAdminClient();
+    const currentUser = await getCurrentUser();
+    if (!currentUser) throw new Error("User is not authenticated.");
+    const isOwnProfile = userId === currentUser.userId;
 
-    const user = await database.listDocuments(
-      DATABASE_ID!,
-      USER_COLLECTION_ID!,
-      [Query.equal("userId", [userId])]
-    );
+    const user = isOwnProfile
+      ? await database.listDocuments(DATABASE_ID!, USERS_COLLECTION_ID!, [
+          Query.equal("userId", [userId]),
+        ])
+      : await database.listDocuments(
+          DATABASE_ID!,
+          PUBLIC_USERS_COLLECTION_ID!,
+          [Query.equal("userId", [userId])]
+        );
+    if (user.total <= 0) throw new Error("User is not found.");
     return parseStringify(user.documents[0]);
   } catch (error) {
     console.log(error);
@@ -65,7 +81,7 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
 
     const newUser = await database.createDocument(
       DATABASE_ID!,
-      USER_COLLECTION_ID!,
+      USERS_COLLECTION_ID!,
       ID.unique(),
       {
         userId: newUserAccount.$id,
@@ -88,16 +104,17 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
   }
 };
 
-export const getLoggedInUser = async () => {
+export const getCurrentUser = async () => {
+  noStore();
   try {
-    const { database } = await createAdminClient();
-    const { account } = await createSessionClient();
+    const { account, database } = await createSessionClient();
     const result = await account.get();
     const user = await database.listDocuments(
       DATABASE_ID!,
-      USER_COLLECTION_ID!,
+      USERS_COLLECTION_ID!,
       [Query.equal("userId", [result.$id])]
     );
+    if (user.total <= 0) return null;
 
     return parseStringify(user.documents[0]);
   } catch (error) {
@@ -118,14 +135,53 @@ export const logoutUser = async () => {
   redirect("/login");
 };
 
-export const getUsers = async () => {
+export const getUsers = async (searchParams?: {
+  [key: string]: string | string[] | undefined;
+}) => {
+  noStore();
+
   try {
     const { database } = await createAdminClient();
+
+    const queries = [];
+    if (searchParams?.status && searchParams.status !== "all")
+      queries.push(Query.equal("status", searchParams.status as string));
+
+    if (searchParams?.query)
+      queries.push(
+        Query.or([
+          Query.contains("firstName", searchParams.query as string),
+          Query.contains("lastName", searchParams.query as string),
+        ])
+      );
+
     const users = await database.listDocuments(
       DATABASE_ID!,
-      USER_COLLECTION_ID!
+      USERS_COLLECTION_ID!,
+      queries
     );
     return parseStringify(users.documents);
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const updateUserInfo = async ({
+  userId,
+  userData,
+}: UpdateUserInfoParams) => {
+  try {
+    const { database } = await createAdminClient();
+
+    const user = await database.updateDocument(
+      DATABASE_ID!,
+      USERS_COLLECTION_ID!,
+      userId,
+      userData
+    );
+    revalidatePath("/dashboard");
+    return parseStringify(user);
   } catch (error) {
     console.log(error);
     return null;

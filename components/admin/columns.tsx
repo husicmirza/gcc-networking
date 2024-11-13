@@ -1,7 +1,8 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "../ui/button";
-import Link from "next/link";
+import ProfileModal from "./ProfileModal";
+import { User } from "@/types/appwrite.types";
+import ProfileApprovalActionModal from "./ProfileApprovalActionModal";
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -39,15 +40,24 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
+    id: "view",
+    header: "View Profile",
+    cell: ({ row }) => {
+      const user = row.original;
+      return <ProfileModal user={user} />;
+    },
+  },
+  {
     id: "action",
     header: "Action",
     cell: ({ row }) => {
-      const id = row.original.$id;
+      const user = row.original;
 
       return (
-        <Link href={`?id=${id}`}>
-          <Button size="sm">View</Button>
-        </Link>
+        <div className="flex gap-x-3">
+          <ProfileApprovalActionModal type="cancel" user={user} />
+          <ProfileApprovalActionModal type="approve" user={user} />
+        </div>
       );
     },
   },
