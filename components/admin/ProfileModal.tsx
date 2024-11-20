@@ -12,6 +12,7 @@ import AboutProfile from "../profile/AboutProfile";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { Button } from "../ui/button";
 import { User } from "@/types/appwrite.types";
+import Link from "next/link";
 
 const ProfileModal = ({ user }: { user: User }) => {
   const [open, setOpen] = useState(false);
@@ -22,10 +23,16 @@ const ProfileModal = ({ user }: { user: User }) => {
         <Button size="sm">View</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-4xl bg-neutral-50 max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
+        <DialogHeader className="flex gap-x-3">
           <DialogTitle className="text-lg font-semibold text-neutral-700">
             Preview {user.firstName} {user.lastName} Profile
           </DialogTitle>
+          <Link
+            href={`/dashboard/profile/${user.userId}`}
+            className="underline"
+          >
+            Visit profile
+          </Link>
         </DialogHeader>
         <ProfileHeader
           imageSrc={user.image}

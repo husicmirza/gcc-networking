@@ -20,6 +20,8 @@ interface ProfileHeaderProps {
   linkedin: string;
   facebook: string;
   instagram: string;
+  isAdmin?: boolean;
+  currentUserId?: string;
 }
 const ProfileHeader = ({
   imageSrc,
@@ -32,6 +34,8 @@ const ProfileHeader = ({
   linkedin,
   facebook,
   instagram,
+  isAdmin,
+  currentUserId,
 }: ProfileHeaderProps) => {
   return (
     <section className="bg-white shadow-md rounded-2xl flex flex-col">
@@ -46,7 +50,7 @@ const ProfileHeader = ({
         <div className="lg:ml-20 mt-20">
           <ImageWithFallBack
             className="object-contain object-center w-40 h-40 rounded-full border-2 bg-white"
-            src={imageSrc}
+            src={imageSrc || ""}
             alt="Avatar"
             width={500}
             height={500}
@@ -73,9 +77,11 @@ const ProfileHeader = ({
             )}
           </div>
           <div className="flex flex-col h-full justify-between gap-y-2">
-            <Link href={`/dashboard/profile/${userId}/edit`}>
-              <Button size={"sm"}>Edit profile</Button>
-            </Link>
+            {(isAdmin || currentUserId === userId) && (
+              <Link href={`/dashboard/profile/${userId}/edit`}>
+                <Button size={"sm"}>Edit profile</Button>
+              </Link>
+            )}
             <div className="flex gap-x-2">
               {linkedin && (
                 <Link href={linkedin} target="_blank">

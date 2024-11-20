@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
 
   if (pathname.startsWith("/login") || pathname.startsWith("/signup")) {
     return currentUser
-      ? Response.redirect(new URL("/dashboard", request.url))
+      ? Response.redirect(new URL("/", request.url))
       : undefined;
   }
 }

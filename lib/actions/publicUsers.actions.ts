@@ -15,7 +15,7 @@ export const createPublicUser = async ({ userData }: { userData: User }) => {
       ID.unique(),
       formatUserData(userData)
     );
-    revalidatePath("/dashboard/people");
+    revalidatePath("/dashboard/profile");
 
     return parseStringify(newUser);
   } catch (error) {
@@ -36,7 +36,7 @@ export const updatePublicUserInfo = async ({
       userId,
       formatUserData(userData)
     );
-    revalidatePath("/dashboard/people");
+    revalidatePath("/dashboard/profile");
 
     return parseStringify(user);
   } catch (error) {

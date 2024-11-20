@@ -1,7 +1,7 @@
 import PeopleContainer from "@/components/people/PeopleContainer";
 import { Suspense } from "react";
 
-const PeoplePage = ({
+const ProfilesPage = ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -13,4 +13,4 @@ const PeoplePage = ({
   );
 };
 
-export default PeoplePage;
+export default ProfilesPage;

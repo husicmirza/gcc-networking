@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 import { createAdminClient, createSessionClient } from "../appwrite.config";
-import { ID, Query } from "node-appwrite";
+import { ID, Permission, Query, Role } from "node-appwrite";
 import { parseStringify } from "../utils";
 import { redirect } from "next/navigation";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
@@ -21,7 +21,7 @@ export const getUserInfo = async (userId: string) => {
     const { database } = await createAdminClient();
     const currentUser = await getCurrentUser();
     if (!currentUser) throw new Error("User is not authenticated.");
-    const isOwnProfile = userId === currentUser.userId;
+    const isOwnProfile = userId === currentUser.userId || currentUser.isAdmin;
 
     const user = isOwnProfile
       ? await database.listDocuments(DATABASE_ID!, USERS_COLLECTION_ID!, [
@@ -86,7 +86,12 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
       {
         userId: newUserAccount.$id,
         ...userData,
-      }
+      },
+      [
+        Permission.read(Role.user(newUserAccount.$id)),
+        Permission.update(Role.user(newUserAccount.$id)),
+        Permission.delete(Role.user(newUserAccount.$id)),
+      ]
     );
 
     const session = await account.createEmailPasswordSession(email, password);
