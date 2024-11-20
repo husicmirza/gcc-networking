@@ -40,6 +40,14 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => {
+      const status = row.original.status;
+      return <p className="text-14-medium capitalize">{status}</p>;
+    },
+  },
+  {
     id: "view",
     header: "View Profile",
     cell: ({ row }) => {

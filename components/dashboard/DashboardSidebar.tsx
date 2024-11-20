@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
 
 import Image from "next/image";
-import { sidebarLinks } from "@/constants";
+import { adminDashboardLinks, sidebarLinks } from "@/constants";
 import DashboardFooter from "./DashboardFooter";
 import { IconUserBolt } from "@tabler/icons-react";
 import { User } from "@/types/appwrite.types";
@@ -19,7 +19,6 @@ const DashboardSidebar = ({
   user: User;
 }>) => {
   const [open, setOpen] = useState(false);
-
   return (
     <div
       className={cn(
@@ -43,6 +42,13 @@ const DashboardSidebar = ({
               {sidebarLinks.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
               ))}
+              {user.isAdmin &&
+                adminDashboardLinks.map((link, idx) => (
+                  <>
+                    <hr className="border-neutral-200" />
+                    <SidebarLink key={idx} link={link} />
+                  </>
+                ))}
             </div>
           </div>
 

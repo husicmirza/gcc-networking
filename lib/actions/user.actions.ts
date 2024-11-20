@@ -21,7 +21,7 @@ export const getUserInfo = async (userId: string) => {
     const { database } = await createAdminClient();
     const currentUser = await getCurrentUser();
     if (!currentUser) throw new Error("User is not authenticated.");
-    const isOwnProfile = userId === currentUser.userId;
+    const isOwnProfile = userId === currentUser.userId || currentUser.isAdmin;
 
     const user = isOwnProfile
       ? await database.listDocuments(DATABASE_ID!, USERS_COLLECTION_ID!, [

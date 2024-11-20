@@ -10,13 +10,8 @@ import {
 
 export const sidebarLinks = [
   {
-    label: "Dashboard",
-    href: "/dashboard",
-    icon: <IconDashboard className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
-  },
-  {
     label: "People",
-    href: "/dashboard/people",
+    href: "/dashboard/profile",
     icon: <IconUsers className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
   },
   {
@@ -28,6 +23,13 @@ export const sidebarLinks = [
     label: "Services",
     href: "/dashboard/services",
     icon: <IconBriefcase className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
+  },
+];
+export const adminDashboardLinks = [
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: <IconDashboard className="text-neutral-700 h-5 w-5 flex-shrink-0" />,
   },
 ];
 
@@ -82,38 +84,6 @@ export const companyItems = [
       "maintaining cutting-edge ICT and ELV solutions, including IP-based systems and network infrastructure.",
     header: "/assets/free-logo.svg",
     badge: "Hospitality",
-  },
-];
-export const peopleItems = [
-  {
-    title: "Mirza Husic",
-    description:
-      "Full Stack maker & UI / UX Designer, love hip hop music. Author of Building UI.",
-    image: "/assets/me1.png",
-    badge: "Information Technology/IT	",
-    location: "Doha, Qatar",
-  },
-  {
-    title: "Mirsad Selimovic",
-    description: "Managing Partner, CEO",
-    image: "/assets/me1.png",
-    badge: "Information Technology/IT	",
-    location: "Doha, Qatar",
-  },
-  {
-    title: "Seid Halilcevic",
-    description: "Managing Partner, CTO",
-    image: "/assets/me1.png",
-    badge: "Information Technology/IT	",
-    location: "Doha, Qatar",
-  },
-  {
-    title: "Mirza Husic",
-    description:
-      "Full Stack maker & UI / UX Designer, love hip hop music. Author of Building UI.",
-    image: "/assets/me1.png",
-    badge: "Information Technology/IT	",
-    location: "Doha, Qatar",
   },
 ];
 
