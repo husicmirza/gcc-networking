@@ -20,8 +20,11 @@ export const getUserInfo = async (userId: string) => {
   try {
     const { database } = await createAdminClient();
     const currentUser = await getCurrentUser();
+
     if (!currentUser) throw new Error("User is not authenticated.");
-    const isOwnProfile = userId === currentUser.userId || currentUser.isAdmin;
+
+    const isAdmin = currentUser.labels.includes("admin");
+    const isOwnProfile = userId === currentUser.userId || isAdmin;
 
     const user = isOwnProfile
       ? await database.listDocuments(DATABASE_ID!, USERS_COLLECTION_ID!, [
@@ -119,9 +122,16 @@ export const getCurrentUser = async () => {
       USERS_COLLECTION_ID!,
       [Query.equal("userId", [result.$id])]
     );
-    if (user.total <= 0) return null;
 
-    return parseStringify(user.documents[0]);
+    if (user.total <= 0) return null;
+    const currentUser = user.documents[0];
+
+    return parseStringify({
+      userId: currentUser.userId,
+      email: currentUser.email,
+      name: `${currentUser.firstName} ${currentUser.lastName}`,
+      labels: result.labels || [],
+    });
   } catch (error) {
     console.log(error);
     return null;

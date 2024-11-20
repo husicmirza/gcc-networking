@@ -9,7 +9,7 @@ export default async function Dashboard({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const user = await getCurrentUser();
-  if (!user.isAdmin) {
+  if (!user.labels.includes("admin")) {
     redirect("/");
   }
   return (

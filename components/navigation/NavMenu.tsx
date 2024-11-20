@@ -16,9 +16,8 @@ import {
 } from "@tabler/icons-react";
 import { logoutUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
-import { User } from "@/types/appwrite.types";
 
-const NavMenu = ({ user }: { user: User }) => {
+const NavMenu = ({ user }: { user: CurrentUser }) => {
   const handleLogOut = async () => {
     const loggedOut = await logoutUser();
     if (loggedOut) redirect("/login");
@@ -27,9 +26,7 @@ const NavMenu = ({ user }: { user: User }) => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>
-            {user.firstName} {user.lastName}
-          </NavigationMenuTrigger>
+          <NavigationMenuTrigger>{user.name}</NavigationMenuTrigger>
 
           <NavigationMenuContent>
             <ul className="flex flex-col py-2 px-2 md:w-[150px] text-sm">
@@ -55,7 +52,7 @@ const NavMenu = ({ user }: { user: User }) => {
                   </Link>
                 </NavigationMenuLink>
               </li>
-              {user.isAdmin && (
+              {user.labels.includes("admin") && (
                 <li className="w-full">
                   <NavigationMenuLink asChild>
                     <Link

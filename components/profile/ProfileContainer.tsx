@@ -26,7 +26,7 @@ const ProfileContainer = async ({ userId }: { userId: string }) => {
         linkedin={user.linkedin}
         facebook={user.facebook}
         instagram={user.instagram}
-        isAdmin={currentUser.isAdmin}
+        isAdmin={currentUser.labels.includes("admin")}
         currentUserId={currentUser.userId}
       />
       <AboutProfile />

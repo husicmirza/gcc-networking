@@ -11,7 +11,12 @@ declare interface CreateUserParams {
   email: string;
   password: string;
 }
-
+declare type CurrentUser = {
+  userId: string;
+  email: string;
+  name: string;
+  labels: string[];
+};
 declare type SignUpParams = {
   firstName: string;
   lastName: string;

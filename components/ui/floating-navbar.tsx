@@ -16,7 +16,7 @@ export const FloatingNav = ({
     icon?: JSX.Element;
   }[];
   className?: string;
-  user: User | null;
+  user: CurrentUser | null;
 }) => {
   return (
     <AnimatePresence mode="wait">
