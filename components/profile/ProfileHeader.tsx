@@ -46,7 +46,7 @@ const ProfileHeader = ({
         <div className="lg:ml-20 mt-20">
           <ImageWithFallBack
             className="object-contain object-center w-40 h-40 rounded-full border-2 bg-white"
-            src={imageSrc}
+            src={imageSrc || ""}
             alt="Avatar"
             width={500}
             height={500}
