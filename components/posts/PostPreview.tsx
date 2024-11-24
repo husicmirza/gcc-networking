@@ -4,16 +4,6 @@ import DateFormatter from "./DateFormatter";
 import Avatar from "./Avatar";
 import { IconArrowRight } from "@tabler/icons-react";
 
-type PostPreviewProps = {
-  title: string;
-  coverImage: string;
-  date: string;
-  excerpt: string;
-  authorName: string;
-  authorImage: string;
-  slug: string;
-};
-
 const PostPreview = ({
   title,
   coverImage,
