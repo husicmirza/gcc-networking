@@ -1,6 +1,6 @@
 import PostBody from "@/components/posts/PostBody";
 import PostHeader from "@/components/posts/PostHeader";
-import { getPost } from "@/lib/actions/posts.api";
+import { getPost } from "@/lib/actions/posts.actions";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 

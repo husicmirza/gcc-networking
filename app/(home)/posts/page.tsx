@@ -1,6 +1,6 @@
 import HeroPost from "@/components/posts/HeroPost";
 import MoreStories from "@/components/posts/MoreStories";
-import { getPosts } from "@/lib/actions/posts.api";
+import { getPosts } from "@/lib/actions/posts.actions";
 
 export default async function Posts() {
   // const allPosts = getAllPosts();
