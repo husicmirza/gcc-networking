@@ -4,8 +4,8 @@ import { getPosts } from "@/lib/actions/posts.actions";
 
 export default async function Posts() {
   // const allPosts = getAllPosts();
-  // const morePosts = allPosts.slice(0, 5);
   const posts = await getPosts();
+  const morePosts = posts.slice(0, 5);
   return (
     <main className="container mx-auto px-5">
       <HeroPost
@@ -17,7 +17,7 @@ export default async function Posts() {
         slug={posts[0].slug}
         excerpt={posts[0].excerpt}
       />
-      {posts.length > 0 && <MoreStories posts={posts} />}
+      {posts.length > 0 && <MoreStories posts={morePosts} />}
     </main>
   );
 }
