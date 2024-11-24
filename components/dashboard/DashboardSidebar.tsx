@@ -19,6 +19,8 @@ const DashboardSidebar = ({
   user: User;
 }>) => {
   const [open, setOpen] = useState(false);
+
+  const isAdmin = user.labels.includes("admin");
   return (
     <div
       className={cn(
@@ -42,12 +44,12 @@ const DashboardSidebar = ({
               {sidebarLinks.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
               ))}
-              {user.isAdmin &&
+              {isAdmin &&
                 adminDashboardLinks.map((link, idx) => (
-                  <>
+                  <div key={idx}>
                     <hr className="border-neutral-200" />
                     <SidebarLink key={idx} link={link} />
-                  </>
+                  </div>
                 ))}
             </div>
           </div>

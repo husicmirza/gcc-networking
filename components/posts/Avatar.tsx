@@ -10,7 +10,7 @@ const Avatar = ({ name, picture }: AvatarProps) => {
     <div className="flex items-center">
       <Image
         src={picture}
-        className="w-12 h-12 rounded-full mr-4"
+        className="w-12 h-12 rounded-full mr-4 object-contain border border-neutral-200"
         alt={name}
         width={300}
         height={300}

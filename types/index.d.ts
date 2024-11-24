@@ -11,7 +11,12 @@ declare interface CreateUserParams {
   email: string;
   password: string;
 }
-
+declare type CurrentUser = {
+  userId: string;
+  email: string;
+  name: string;
+  labels: string[];
+};
 declare type SignUpParams = {
   firstName: string;
   lastName: string;
@@ -31,15 +36,15 @@ declare type Author = {
 };
 
 declare type Post = {
+  $createdAt: string;
   slug: string;
   title: string;
   date: string;
   coverImage: string;
-  author: Author;
+  authorName: string;
+  authorImage: string;
   excerpt: string;
-  ogImage: {
-    url: string;
-  };
+  ogImage: string;
   content: string;
   preview?: boolean;
 };
