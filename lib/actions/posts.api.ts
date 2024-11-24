@@ -1,27 +1,37 @@
-import fs from "fs";
-import matter from "gray-matter";
-import { join } from "path";
+import { createAdminClient } from "../appwrite.config";
+import { parseStringify } from "../utils";
+import { Query } from "node-appwrite";
 
-const postsDirectory = join(process.cwd(), "_posts");
+const { POSTS_COLLECTION_ID, DATABASE_ID } = process.env;
 
-export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
-}
+export const getPosts = async () => {
+  try {
+    const { database } = await createAdminClient();
 
-export function getPostBySlug(slug: string) {
-  const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = join(postsDirectory, `${realSlug}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
+    const posts = await database.listDocuments(
+      DATABASE_ID!,
+      POSTS_COLLECTION_ID!,
+      [Query.orderDesc("$createdAt")]
+    );
+    return parseStringify(posts.documents);
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
 
-  return { ...data, slug: realSlug, content } as Post;
-}
+export const getPost = async (slug: string) => {
+  try {
+    const { database } = await createAdminClient();
 
-export function getAllPosts(): Post[] {
-  const slugs = getPostSlugs();
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug))
-    // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-  return posts;
-}
+    const posts = await database.listDocuments(
+      DATABASE_ID!,
+      POSTS_COLLECTION_ID!,
+      [Query.equal("slug", [slug])]
+    );
+    return parseStringify(posts.documents[0]);
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

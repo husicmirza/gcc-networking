@@ -36,15 +36,15 @@ declare type Author = {
 };
 
 declare type Post = {
+  $createdAt: string;
   slug: string;
   title: string;
   date: string;
   coverImage: string;
-  author: Author;
+  authorName: string;
+  authorImage: string;
   excerpt: string;
-  ogImage: {
-    url: string;
-  };
+  ogImage: string;
   content: string;
   preview?: boolean;
 };

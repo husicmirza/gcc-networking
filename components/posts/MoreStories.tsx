@@ -6,8 +6,9 @@ const MoreStories = ({ posts }: { posts: Post[] }) => {
     <PostPreview
       title={post.title}
       coverImage={post.coverImage}
-      date={post.date}
-      author={post.author}
+      date={post.$createdAt}
+      authorName={post.authorName}
+      authorImage={post.authorImage}
       slug={post.slug}
       excerpt={post.excerpt}
     />

@@ -9,7 +9,8 @@ type HeroPostProps = {
   coverImage: string;
   date: string;
   excerpt: string;
-  author: Author;
+  authorName: string;
+  authorImage: string;
   slug: string;
 };
 
@@ -18,7 +19,8 @@ const HeroPost = ({
   coverImage,
   date,
   excerpt,
-  author,
+  authorName,
+  authorImage,
   slug,
 }: HeroPostProps) => {
   return (
@@ -40,7 +42,7 @@ const HeroPost = ({
         <div>
           <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
           <div className="flex justify-between items-end">
-            <Avatar name={author.name} picture={author.picture} />
+            <Avatar name={authorName} picture={authorImage} />
             <Link
               href={`/posts/${slug}`}
               className="underline flex items-center pb-2 pr-1 hover:text-neutral-500"

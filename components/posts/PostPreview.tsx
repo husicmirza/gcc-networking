@@ -9,7 +9,8 @@ type PostPreviewProps = {
   coverImage: string;
   date: string;
   excerpt: string;
-  author: Author;
+  authorName: string;
+  authorImage: string;
   slug: string;
 };
 
@@ -18,7 +19,8 @@ const PostPreview = ({
   coverImage,
   date,
   excerpt,
-  author,
+  authorName,
+  authorImage,
   slug,
 }: PostPreviewProps) => {
   return (
@@ -38,7 +40,7 @@ const PostPreview = ({
         {excerpt.length > 258 ? `${excerpt.slice(0, 258)}..` : excerpt}
       </p>
       <div className="flex justify-between items-end mt-auto">
-        <Avatar name={author.name} picture={author.picture} />
+        <Avatar name={authorName} picture={authorImage} />
         <Link
           href={`/posts/${slug}`}
           className="underline flex items-center pb-3 pr-1 hover:text-neutral-500"
