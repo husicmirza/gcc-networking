@@ -30,3 +30,20 @@ export const formatUserData = (userData: User) => ({
   occupation: userData.occupation ?? "",
   user: userData.$id ?? "",
 });
+
+import { parseISO, format } from "date-fns";
+
+export const getDay = (dateString: string): string => {
+  const date = parseISO(dateString);
+  return format(date, "d");
+};
+
+export const getMonth = (dateString: string): string => {
+  const date = parseISO(dateString);
+  return format(date, "LLL");
+};
+
+export const getTime = (dateString: string): string => {
+  const date = parseISO(dateString);
+  return format(date, "hh:mm a");
+};

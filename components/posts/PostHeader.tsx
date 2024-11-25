@@ -21,19 +21,14 @@ const PostHeader = ({
   return (
     <>
       <PostTitle>{title}</PostTitle>
-      <div className="hidden md:block md:mb-12">
-        <Avatar name={authorName} picture={authorImage} />
-      </div>
       <div className="mb-8 md:mb-16 sm:mx-0">
         <CoverImage title={title} src={coverImage} />
       </div>
-      <div className="max-w-2xl mx-auto">
-        <div className="block md:hidden mb-6">
-          <Avatar name={authorName} picture={authorImage} />
-        </div>
-        <div className="mb-6 text-lg">
+      <div className="max-w-3xl mx-auto flex justify-between items-center mb-6">
+        <div className="text-lg">
           <DateFormatter dateString={date} />
         </div>
+        <Avatar name={authorName} picture={authorImage} />
       </div>
     </>
   );

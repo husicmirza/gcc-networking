@@ -1,28 +1,15 @@
-import PostBody from "@/components/posts/PostBody";
-import PostHeader from "@/components/posts/PostHeader";
 import { getPost } from "@/lib/actions/posts.actions";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { Suspense } from "react";
+import PostWrapper from "@/components/posts/PostWrapper";
 
-export default async function Post({ params: { slug } }: SearchParamProps) {
-  const post = await getPost(slug);
-
-  if (!post) {
-    return notFound();
-  }
-
+export default async function Post({ params }: { params: { slug: string } }) {
   return (
-    <main className="container mx-auto px-5">
-      <article className="mb-32">
-        <PostHeader
-          title={post.title}
-          coverImage={post.coverImage}
-          date={post.$createdAt}
-          authorName={post.authorName}
-          authorImage={post.authorImage}
-        />
-        <PostBody content={post.content} />
-      </article>
+    <main className="max-w-5xl 2xl:max-w-7xl mx-auto px-5">
+      <Suspense fallback={<div>Loading...</div>}>
+        <PostWrapper params={params} />
+      </Suspense>
     </main>
   );
 }

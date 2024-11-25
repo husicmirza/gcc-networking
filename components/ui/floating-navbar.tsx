@@ -10,11 +10,7 @@ export const FloatingNav = ({
   className,
   user,
 }: {
-  navItems: {
-    label: string;
-    href: string;
-    icon?: JSX.Element;
-  }[];
+  navItems: NavItemProps[];
   className?: string;
   user: CurrentUser | null;
 }) => {
@@ -26,7 +22,7 @@ export const FloatingNav = ({
           className
         )}
       >
-        {navItems.map((navItem: any, idx: number) => (
+        {navItems.map((navItem: NavItemProps, idx: number) => (
           <Link
             key={`link=${idx}`}
             href={navItem.href}

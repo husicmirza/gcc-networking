@@ -69,3 +69,8 @@ declare type PostGridItemProps = {
   slug: string;
   category: string;
 };
+declare type NavItemProps = {
+  label: string;
+  href: string;
+  icon?: JSX.Element;
+};
