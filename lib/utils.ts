@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { User } from "@/types/appwrite.types";
@@ -46,4 +47,8 @@ export const getMonth = (dateString: string): string => {
 export const getTime = (dateString: string): string => {
   const date = parseISO(dateString);
   return format(date, "hh:mm a");
+};
+
+export const truncateString = (str: string, maxLength: number): string => {
+  return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
 };

@@ -1,19 +1,12 @@
-import EventCard from "@/components/events/EventCard";
-import { Grid } from "@/components/ui/grid";
+import EventsWrapper from "@/components/events/EventsWrapper";
+import { Suspense } from "react";
 
-export default async function EventsPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default async function EventsPage() {
   return (
     <main className="container mx-auto px-5 mb-10 md:mb-20">
-      <Grid className="md:grid-cols-2 lg:grid-cols-3">
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-      </Grid>
+      <Suspense fallback={<div>Loading...</div>}>
+        <EventsWrapper />
+      </Suspense>
     </main>
   );
 }

@@ -74,3 +74,13 @@ declare type NavItemProps = {
   href: string;
   icon?: JSX.Element;
 };
+
+declare type EventCardProps = {
+  title: string;
+  coverImage: string;
+  startDate: string;
+  slug: string;
+  location: string;
+  city: string;
+  country: string;
+};
