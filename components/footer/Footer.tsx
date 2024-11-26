@@ -39,7 +39,7 @@ const Footer = () => {
         <hr className="my-10 border-neutral-200" />
         <div className="flex flex-col items-center sm:flex-row sm:justify-between">
           <p className="text-sm text-neutral-500">
-            © Copyright 2024. All Rights Reserved.
+            © 2024 Balkan Connect. All Rights Reserved.
           </p>
           <div className="flex mt-3 sm:mt-0">
             <Link
