@@ -1,7 +1,7 @@
 import { Card, Carousel } from "../ui/carousel-cards";
 import PostPreview from "./PostPreview";
 
-const MoreStories = ({ posts }: { posts: Post[] }) => {
+const LatestPosts = ({ posts }: { posts: Post[] }) => {
   const renderPostPreview = (post: Post) => (
     <PostPreview
       title={post.title}
@@ -20,18 +20,20 @@ const MoreStories = ({ posts }: { posts: Post[] }) => {
   ));
   return (
     <section>
-      <h2 className="mb-8 text-5xl md:text-7xl font-bold tracking-tighter leading-tight">
-        More Posts
-      </h2>
-      <div className="mb-32 hidden sm:block">
-        <Carousel items={carouselItems} />
-      </div>
-      <div className="mb-32 sm:hidden gap-y-20 grid grid-cols-1">
-        {posts.map((post) => (
-          <div key={post.slug}>{renderPostPreview(post)}</div>
-        ))}
+      <div className="py-10">
+        <h2 className="mb-4 text-3xl md:text-5xl font-bold tracking-tighter leading-tight">
+          Latest Blog Posts
+        </h2>
+        <div className="mb-10 hidden sm:block">
+          <Carousel items={carouselItems} />
+        </div>
+        <div className="mb-10 sm:hidden gap-y-20 grid grid-cols-1">
+          {posts.map((post) => (
+            <div key={post.slug}>{renderPostPreview(post)}</div>
+          ))}
+        </div>
       </div>
     </section>
   );
 };
-export default MoreStories;
+export default LatestPosts;

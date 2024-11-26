@@ -47,6 +47,59 @@ declare type Post = {
   ogImage: string;
   content: string;
   preview?: boolean;
+  category: string;
 };
 
 declare type UpdateUserInfoParams = { userId: string; userData: User };
+
+declare type PostPreviewProps = {
+  title: string;
+  coverImage: string;
+  date: string;
+  excerpt: string;
+  authorName: string;
+  authorImage: string;
+  slug: string;
+};
+
+declare type PostGridItemProps = {
+  title: string;
+  coverImage: string;
+  date: string;
+  slug: string;
+  category: string;
+};
+declare type NavItemProps = {
+  label: string;
+  href: string;
+  icon?: JSX.Element;
+};
+
+declare type EventCardProps = {
+  title: string;
+  coverImage: string;
+  startDate: string;
+  slug: string;
+  location: string;
+  city: string;
+  country: string;
+};
+
+declare type PostHeaderProps = {
+  title: string;
+  coverImage: string;
+  date: string;
+};
+
+declare type EventHeaderProps = {
+  title: string;
+  coverImage: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  city: string;
+  country: string;
+  price: number;
+  currency: string;
+  isFreeEvent: boolean;
+};

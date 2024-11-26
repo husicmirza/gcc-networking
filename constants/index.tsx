@@ -6,6 +6,7 @@ import {
   IconMessage,
   IconBriefcase,
   IconDashboard,
+  IconCalendarEvent,
 } from "@tabler/icons-react";
 
 export const sidebarLinks = [
@@ -46,6 +47,13 @@ export const navItems = [
     href: "/posts",
     icon: (
       <IconBlockquote className="h-5 w-5 text-neutral-700 hover:text-neutral-500" />
+    ),
+  },
+  {
+    label: "Events",
+    href: "/events",
+    icon: (
+      <IconCalendarEvent className="h-5 w-5 text-neutral-700 hover:text-neutral-500" />
     ),
   },
   {
