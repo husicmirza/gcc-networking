@@ -84,3 +84,22 @@ declare type EventCardProps = {
   city: string;
   country: string;
 };
+
+declare type PostHeaderProps = {
+  title: string;
+  coverImage: string;
+  date: string;
+};
+
+declare type EventHeaderProps = {
+  title: string;
+  coverImage: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  city: string;
+  country: string;
+  price: number;
+  currency: string;
+  isFreeEvent: boolean;
+};

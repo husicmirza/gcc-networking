@@ -122,21 +122,21 @@ body {
   font-weight: 500;
 }
 
-.post-body {
+.content-body {
   @apply text-lg leading-relaxed text-justify;
 }
 
-.post-body p,
-.post-body ul,
-.post-body ol,
-.post-body blockquote {
+.content-body p,
+.content-body ul,
+.content-body ol,
+.content-body blockquote {
   @apply my-6;
 }
 
-.post-body h2 {
+.content-body h2 {
   @apply text-3xl mt-12 mb-4 leading-snug;
 }
 
-.post-body h3 {
+.content-body h3 {
   @apply text-2xl mt-8 mb-4 leading-snug;
 }

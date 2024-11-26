@@ -1,7 +1,8 @@
 import React from "react";
 import PostHeader from "./PostHeader";
 import { getPost } from "@/lib/actions/posts.actions";
-import PostBody from "./PostBody";
+import ContentBody from "./ContentBody";
+import Avatar from "./Avatar";
 
 const PostWrapper = async ({ params }: { params: { slug: string } }) => {
   const post = await getPost(params.slug);
@@ -11,10 +12,11 @@ const PostWrapper = async ({ params }: { params: { slug: string } }) => {
         title={post.title}
         coverImage={post.coverImage}
         date={post.$createdAt}
-        authorName={post.authorName}
-        authorImage={post.authorImage}
       />
-      <PostBody content={post.content} />
+      <ContentBody content={post.content} />
+      <div className="max-w-3xl mx-auto">
+        <Avatar name={post.authorName} picture={post.authorImage} />
+      </div>
     </article>
   );
 };

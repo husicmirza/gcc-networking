@@ -15,7 +15,7 @@ const Avatar = ({ name, picture }: AvatarProps) => {
         width={300}
         height={300}
       />
-      <div className="text-lg font-bold">{name}</div>
+      <div className="font-bold">{name}</div>
     </div>
   );
 };
