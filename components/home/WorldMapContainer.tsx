@@ -4,7 +4,7 @@ import { WorldMap } from "../ui/world-map";
 
 export function WorldMapContainer() {
   return (
-    <div className="pt-36 pb-12 bg-white w-full">
+    <div className="pb-12 bg-white w-full">
       <div className="max-w-2xl mx-auto text-center">
         <p className="font-bold text-xl md:text-6xl text-black">
           Balkan{" "}
