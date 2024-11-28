@@ -16,20 +16,7 @@ export function Hero() {
         className="relative flex flex-col gap-4 items-center justify-center px-4"
       >
         <p className="font-bold text-4xl sm:text-5xl md:text-7xl text-neutral-700">
-          Balkan{" "}
-          <span className="text-neutral-400">
-            {"Connect".split("").map((word, idx) => (
-              <motion.span
-                key={idx}
-                className="inline-block"
-                initial={{ x: -10, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: idx * 0.04 }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </span>
+          Balkan <span className="text-neutral-400">Connect</span>
         </p>
         <div className="font-extralight text-2xl md:text-4xl pb-12 pt-2 text-center">
           Connecting Balkan Expats Across the Middle East.
