@@ -32,9 +32,7 @@ const Feature = ({
 }) => {
   return (
     <div
-      className={cn(
-        "flex flex-col py-10 relative group/feature shadow-sm rounded-b-lg"
-      )}
+      className={cn("flex flex-col py-10 relative group/feature  rounded-b-lg")}
     >
       {index < 4 && (
         <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-neutral-100 to-transparent pointer-events-none" />
