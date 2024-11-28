@@ -4,9 +4,9 @@ import { WorldMap } from "../ui/world-map";
 
 export function WorldMapContainer() {
   return (
-    <div className="pb-12 bg-white w-full">
+    <div className="pb-12 pt-12 md:pt-0 bg-white w-full">
       <div className="max-w-2xl mx-auto text-center">
-        <p className="font-bold text-xl md:text-6xl text-black">
+        <p className="font-bold text-3xl md:text-7xl text-neutral-700">
           Balkan{" "}
           <span className="text-neutral-400">
             {"Connect".split("").map((word, idx) => (
@@ -22,7 +22,7 @@ export function WorldMapContainer() {
             ))}
           </span>
         </p>
-        <p className="text-sm md:text-lg font-semibold py-4 text-center">
+        <p className="text-sm md:text-lg font-semibold py-4 text-center text-neutral-400 tracking-widest">
           Connecting Balkan Expats Across the Middle East.
         </p>
       </div>
@@ -40,23 +40,23 @@ export function WorldMapContainer() {
           },
           {
             start: { lat: 64.2008, lng: -149.4937 }, // Alaska (Fairbanks)
-            end: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
+            end: { lat: -20.7975, lng: -60.8919 }, // Brazil (Brasília)
           },
           {
-            start: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
-            end: { lat: 38.7223, lng: -9.1393 }, // Lisbon
+            start: { lat: -20.7975, lng: -60.8919 }, // Brazil (Brasília)
+            end: { lat: 41.1657, lng: 10.4515 }, // Euro
           },
           {
             start: { lat: 51.5074, lng: -0.1278 }, // London
-            end: { lat: 28.6139, lng: 77.209 }, // New Delhi
+            end: { lat: 25.276987, lng: 51.520008 }, // Doha
           },
           {
-            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
+            start: { lat: 25.276987, lng: 51.520008 }, // Doha
             end: { lat: 43.1332, lng: 131.9113 }, // Vladivostok
           },
           {
-            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
-            end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
+            start: { lat: 25.276987, lng: 51.520008 }, // Doha
+            end: { lat: -20.2921, lng: 26.8219 }, // Africa
           },
         ]}
       />
