@@ -19,7 +19,7 @@ export default async function RootLayout({
   return (
     <main className="flex flex-col min-h-screen">
       <FloatingNav navItems={navItems} user={user} />
-      <div className="flex-grow pt-32">{children}</div>
+      <div className="flex-grow mt-12 md:mt-36">{children}</div>
       <Footer />
     </main>
   );
