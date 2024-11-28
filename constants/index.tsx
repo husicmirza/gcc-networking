@@ -7,6 +7,12 @@ import {
   IconBriefcase,
   IconDashboard,
   IconCalendarEvent,
+  IconTerminal2,
+  IconEaseInOut,
+  IconCurrencyDollar,
+  IconWorldSearch,
+  IconBooks,
+  IconSpeakerphone,
 } from "@tabler/icons-react";
 
 export const sidebarLinks = [
@@ -821,5 +827,31 @@ export const statusOptions = [
   {
     value: "cancelled",
     label: "Cancelled",
+  },
+];
+
+export const features = [
+  {
+    title: "Discover Balkan Expats",
+    description:
+      "Easily find and connect with fellow Balkan expats living in the Middle East.",
+    icon: <IconWorldSearch />,
+  },
+  {
+    title: "Guides & Tips",
+    description: "Navigate your journey with curated guides and tips.",
+    icon: <IconBooks />,
+  },
+  {
+    title: "Events to Connect & Celebrate",
+    description:
+      "Stay updated on the latest events, gatherings, and cultural celebrations happening across the region",
+    icon: <IconSpeakerphone />,
+  },
+  {
+    title: "Discover Companies & Services",
+    description:
+      "Explore Balkan-owned businesses and services operating in the Middle East.",
+    icon: <IconBuildings />,
   },
 ];
