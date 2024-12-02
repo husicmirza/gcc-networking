@@ -3,11 +3,13 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import PostWrapper from "@/components/posts/PostWrapper";
+import { ArticleSkeleton } from "@/components/skeletons/ArticleSkeleton";
 
 export default async function Post({ params }: { params: { slug: string } }) {
+  const serializedSearchParams = JSON.stringify(params.slug);
   return (
     <main className="max-w-5xl 2xl:max-w-7xl mx-auto px-5">
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense key={serializedSearchParams} fallback={<ArticleSkeleton />}>
         <PostWrapper params={params} />
       </Suspense>
     </main>

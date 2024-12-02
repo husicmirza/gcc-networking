@@ -1,4 +1,5 @@
-import PeopleContainer from "@/components/people/PeopleContainer";
+import ProfilesContainer from "@/components/profile/ProfilesContainer";
+import { ProfilesSkeletonWrapper } from "@/components/skeletons/ProfilesSkeleton";
 import { Suspense } from "react";
 
 const ProfilesPage = ({
@@ -6,9 +7,14 @@ const ProfilesPage = ({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
+  const serializedSearchParams = JSON.stringify(searchParams);
+
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <PeopleContainer searchParams={searchParams} />
+    <Suspense
+      key={serializedSearchParams}
+      fallback={<ProfilesSkeletonWrapper />}
+    >
+      <ProfilesContainer searchParams={searchParams} />
     </Suspense>
   );
 };

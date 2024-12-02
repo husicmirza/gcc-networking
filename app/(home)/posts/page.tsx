@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import CategoryTabs from "@/components/posts/CategoryTabs";
 import HeroPostSkeleton from "@/components/skeletons/HeroPostSkeleton";
 import { LatestPostsSkeletonWrapper } from "@/components/skeletons/LatestPostsSkeleton";
+import { PostByCategorySkeletonWrapper } from "@/components/skeletons/PostsByCategorySkeleton";
 
 export default async function Posts({
   searchParams,
@@ -25,7 +26,10 @@ export default async function Posts({
         <LatestPostsWrapper />
       </Suspense>
       <CategoryTabs />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        key={serializedSearchParams}
+        fallback={<PostByCategorySkeletonWrapper />}
+      >
         <PostsByCategoryWrapper searchParams={searchParams} />
       </Suspense>
     </main>

@@ -60,7 +60,7 @@ export const CompanyGridItem = ({
   );
 };
 
-export const PeopleGridItem = ({
+export const ProfileGridItem = ({
   className,
   fullName,
   userId,
