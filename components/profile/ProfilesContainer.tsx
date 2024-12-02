@@ -1,10 +1,10 @@
 import React from "react";
-import { Grid, PeopleGridItem } from "../ui/grid";
+import { Grid, ProfileGridItem } from "../ui/grid";
 import FiltersWrapper from "../filters/FiltersWrapper";
 import { getPublicUsers } from "@/lib/actions/publicUsers.actions";
 import { User } from "@/types/appwrite.types";
 
-const PeopleContainer = async ({
+const ProfilesContainer = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -25,7 +25,7 @@ const PeopleContainer = async ({
           users
             .filter((user: User) => user.status === "approved")
             .map((user: User) => (
-              <PeopleGridItem
+              <ProfileGridItem
                 key={user.$id}
                 userId={user.userId}
                 fullName={`${user.firstName} ${user.lastName}`}
@@ -41,4 +41,4 @@ const PeopleContainer = async ({
   );
 };
 
-export default PeopleContainer;
+export default ProfilesContainer;

@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { logIn, signUp } from "@/lib/actions/user.actions";
 import { useToast } from "@/hooks/use-toast";
-import { IconLoader } from "@tabler/icons-react";
+import { IconChevronLeft, IconLoader } from "@tabler/icons-react";
 const AuthForm = ({ type }: { type: string }) => {
   const typeLable = type === "login" ? "Login" : "Sign up";
   const formSchema = authFormSchema(type);
@@ -74,9 +74,15 @@ const AuthForm = ({ type }: { type: string }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex items-center justify-center py-12">
           <div className="mx-auto grid w-[350px] gap-6">
+            <Link href="/">
+              <Button variant={"link"} type="button">
+                <IconChevronLeft />
+                Back
+              </Button>
+            </Link>
             <div className="grid gap-2 text-center">
               <h1 className="text-3xl font-bold">{typeLable}</h1>
               <p className="text-balance text-muted-foreground">

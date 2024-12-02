@@ -1,8 +1,15 @@
 import ProfileContainer from "@/components/profile/ProfileContainer";
-import React from "react";
+import { ProfileSkeleton } from "@/components/skeletons/ProfileSkeleton";
+import React, { Suspense } from "react";
 
 export default async function ProfilePage({
   params: { userId },
 }: SearchParamProps) {
-  return <ProfileContainer userId={userId} />;
+  const serializedSearchParams = JSON.stringify(userId);
+
+  return (
+    <Suspense key={serializedSearchParams} fallback={<ProfileSkeleton />}>
+      <ProfileContainer userId={userId} />
+    </Suspense>
+  );
 }
