@@ -26,7 +26,9 @@ const NavMenu = ({ user }: { user: CurrentUser }) => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>{user.name}</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="px-0 py-0 h-0">
+            {user.name}
+          </NavigationMenuTrigger>
 
           <NavigationMenuContent>
             <ul className="flex flex-col py-2 px-2 md:w-[150px] text-sm">
