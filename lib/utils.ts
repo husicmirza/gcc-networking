@@ -31,6 +31,7 @@ export const formatUserData = (userData: User) => ({
   image: userData.image ?? "",
   occupation: userData.occupation ?? "",
   user: userData.$id ?? "",
+  biography: userData.biography ?? "",
 });
 
 import { parseISO, format } from "date-fns";

@@ -68,6 +68,36 @@ export const editProfileSchema = z.object({
     .refine((phone) => /^\+\d{10,15}$/.test(phone), "Invalid phone number"),
   email: z.string().email("Invalid email address"),
   status: z.enum(["created", "pending", "approved", "cancelled"]),
+  occupation: z.string().min(2, "Please enter an occupation"),
+  company: z.string().min(2, "Please enter a company"),
+  industry: z.string().min(2, "Please enter an industry"),
+  cityOfOrigin: z.string().min(2, "Please enter a city of origin"),
+  countryOfOrigin: z.string().min(2, "Please enter a country of origin"),
+  linkedin: z
+    .string()
+    .url("Please enter a valid LinkedIn URL")
+    .regex(
+      /^https?:\/\/(www\.)?linkedin\.com\/(in|company)\/[a-zA-Z0-9_-]+\/?$/
+    )
+    .optional(),
+  instagram: z
+    .string()
+    .url("Please enter a valid Instagram URL")
+    .regex(/^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9._]+\/?$/)
+    .optional(),
+  facebook: z
+    .string()
+    .url("Please enter a valid facebook URL")
+    .regex(
+      /^https?:\/\/(www\.)?linkedin\.com\/(in|company)\/[a-zA-Z0-9_-]+\/?$/
+    )
+    .optional(),
+  image: z
+    .custom((value) => {
+      return typeof value === "string" || typeof value === "object";
+    })
+    .optional(),
+  biography: z.string().min(2, "Please enter a biography"),
 });
 
 export type EditProfileDataFormType = z.infer<typeof editProfileSchema>;
