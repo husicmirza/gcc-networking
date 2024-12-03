@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { logIn, signUp } from "@/lib/actions/user.actions";
 import { useToast } from "@/hooks/use-toast";
-import { IconChevronLeft, IconLoader } from "@tabler/icons-react";
+import { IconChevronLeft, IconLoader, IconMail } from "@tabler/icons-react";
 const AuthForm = ({ type }: { type: string }) => {
   const typeLable = type === "login" ? "Login" : "Sign up";
   const formSchema = authFormSchema(type);
@@ -157,7 +157,7 @@ const AuthForm = ({ type }: { type: string }) => {
                 name="email"
                 placeholder="john@example.com"
                 label="Email"
-                iconSrc="/assets/icons/email.svg"
+                iconSrc={<IconMail />}
               />
 
               <CustomFormField

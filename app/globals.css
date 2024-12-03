@@ -89,12 +89,12 @@ body {
 
   /* =====  REACT PHONE NUMBER INPUT OVERRIDES */
   .input-phone {
-    @apply mt-2 h-10 rounded-md px-3 text-sm border !important;
+    @apply mt-2 h-10 rounded-md px-3 text-sm border bg-white !important;
   }
 
   /* =====  REACT DATE PICKER OVERRIDES */
   .date-picker {
-    @apply overflow-hidden border-transparent w-full h-10 text-14-medium rounded-md px-3 outline-none !important;
+    @apply overflow-hidden border-transparent w-full h-10 text-14-medium rounded-md px-3 outline-none bg-white !important;
   }
 }
 

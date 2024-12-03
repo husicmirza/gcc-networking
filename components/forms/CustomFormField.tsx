@@ -23,6 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import "react-datepicker/dist/react-datepicker.css";
+import { IconCalendar } from "@tabler/icons-react";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -39,7 +40,7 @@ interface CustomFormFieldProps {
   name: string;
   label?: string;
   placeholder?: string;
-  iconSrc?: string;
+  iconSrc?: string | React.ReactNode;
   iconAlt?: string;
   disabled?: boolean;
   dateFormat?: string;
@@ -60,15 +61,11 @@ const RenderInput = ({
   switch (props.fieldType) {
     case FormFieldType.INPUT:
       return (
-        <div className="flex rounded-md border">
+        <div className="flex rounded-md border bg-white">
           {props.iconSrc && (
-            <Image
-              src={props.iconSrc}
-              alt={props.iconAlt || "icon"}
-              width={24}
-              height={24}
-              className="ml-2"
-            />
+            <div className="mx-2 flex-1 flex justify-center items-center text-neutral-700">
+              {props.iconSrc}
+            </div>
           )}
           <FormControl>
             <Input
@@ -121,14 +118,10 @@ const RenderInput = ({
       );
     case FormFieldType.DATE_PICKER:
       return (
-        <div className="flex rounded-md border">
-          <Image
-            src={"/assets/icons/calendar.svg"}
-            alt={"icon"}
-            width={24}
-            height={24}
-            className="ml-2"
-          />
+        <div className="flex rounded-md border bg-white">
+          <div className="mx-2 flex-1 flex justify-center items-center text-neutral-700">
+            <IconCalendar />
+          </div>{" "}
           <FormControl>
             <DatePicker
               showTimeSelect={props.showTimeSelect ?? false}
@@ -168,7 +161,7 @@ const CustomFormField = (props: CustomFormFieldProps) => {
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex-1">
+        <FormItem className="flex-1 mt-1">
           {fieldType !== FormFieldType.CHECKBOX && label && (
             <FormLabel className="text-muted-foreground">{label}</FormLabel>
           )}
