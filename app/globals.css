@@ -140,3 +140,11 @@ body {
 .content-body h3 {
   @apply text-2xl mt-8 mb-4 leading-snug;
 }
+
+.file-upload {
+  @apply text-[12px] leading-[16px] font-normal flex cursor-pointer  flex-col items-center justify-center gap-3 rounded-md border border-dashed border-neutral-200 bg-white p-5;
+}
+
+.file-upload_label {
+  @apply flex flex-col justify-center gap-2 text-center text-neutral-600;
+}

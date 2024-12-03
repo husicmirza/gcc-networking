@@ -2,7 +2,7 @@
 import { EditProfileDataFormType, editProfileSchema } from "@/lib/validation";
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
+import { Form, FormControl } from "@/components/ui/form";
 
 import { useForm } from "react-hook-form";
 import { useToast } from "@/hooks/use-toast";
@@ -18,6 +18,7 @@ import {
   IconMail,
 } from "@tabler/icons-react";
 import { User } from "@/types/appwrite.types";
+import FileUploader from "../core/ImageUploader";
 const EditProfileForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState(false);
   // const router = useRouter();
@@ -200,9 +201,18 @@ const EditProfileForm = ({ user }: { user: User }) => {
           <div className="my-8">
             <h3 className="text-lg font-bold tracking-tight">Profil Image</h3>
             <p className="text-muted-foreground">Upload your profile picture</p>
-            <Separator />
+            <Separator className="mb-8" />
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.SKELETON}
+              name="image"
+              renderSkeleton={(field) => (
+                <FormControl>
+                  <FileUploader onChange={field.onChange} files={field.value} />
+                </FormControl>
+              )}
+            />
           </div>
-
           <div className="my-8">
             <h3 className="text-lg font-bold tracking-tight">About Me</h3>
             <p className="text-muted-foreground">Add your biography</p>
