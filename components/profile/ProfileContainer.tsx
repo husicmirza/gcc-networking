@@ -29,7 +29,14 @@ const ProfileContainer = async ({ userId }: { userId: string }) => {
         isAdmin={currentUser.labels.includes("admin")}
         currentUserId={currentUser.userId}
       />
-      <AboutProfile />
+      <AboutProfile
+        dateOfBirth={user.dateOfBirth}
+        cityOfOrigin={user.cityOfOrigin}
+        countryOfOrigin={user.countryOfOrigin}
+        email={user.email}
+        phone={user.phone}
+        biography={user.biography}
+      />
     </div>
   );
 };
