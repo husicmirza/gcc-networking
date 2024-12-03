@@ -215,7 +215,7 @@ const EditProfileForm = ({ user }: { user: User }) => {
                 Loading...
               </>
             ) : (
-              "Update Profile"
+              "Submit for approval"
             )}
           </Button>
         </section>
