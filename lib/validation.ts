@@ -1,5 +1,19 @@
 import { z } from "zod";
 
+const socialMediaUrlValidation = (platformUrl: string) => {
+  return z
+    .union([
+      z
+        .string()
+        .url(`Must be a valid URL: https://www.url.com`)
+        .refine((url) => url.startsWith(platformUrl), {
+          message: `URL must start with ${platformUrl}`,
+        }),
+      z.literal(""),
+    ])
+    .nullable()
+    .optional();
+};
 export const authFormSchema = (type: string) =>
   z.object({
     firstName:
@@ -73,25 +87,9 @@ export const editProfileSchema = z.object({
   industry: z.string().min(2, "Please enter an industry"),
   cityOfOrigin: z.string().min(2, "Please enter a city of origin"),
   countryOfOrigin: z.string().min(2, "Please enter a country of origin"),
-  linkedin: z
-    .string()
-    .url("Please enter a valid LinkedIn URL")
-    .regex(
-      /^https?:\/\/(www\.)?linkedin\.com\/(in|company)\/[a-zA-Z0-9_-]+\/?$/
-    )
-    .optional(),
-  instagram: z
-    .string()
-    .url("Please enter a valid Instagram URL")
-    .regex(/^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9._]+\/?$/)
-    .optional(),
-  facebook: z
-    .string()
-    .url("Please enter a valid facebook URL")
-    .regex(
-      /^https?:\/\/(www\.)?linkedin\.com\/(in|company)\/[a-zA-Z0-9_-]+\/?$/
-    )
-    .optional(),
+  linkedin: socialMediaUrlValidation("https://www.linkedin.com/"),
+  instagram: socialMediaUrlValidation("https://www.instagram.com/"),
+  facebook: socialMediaUrlValidation("https://www.facebook.com/"),
   image: z
     .custom((value) => {
       return typeof value === "string" || typeof value === "object";

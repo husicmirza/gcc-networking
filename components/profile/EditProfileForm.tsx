@@ -30,9 +30,23 @@ const EditProfileForm = ({ user }: { user: User }) => {
       status: "pending",
     },
   });
-
   const onSubmit = async (data: EditProfileDataFormType) => {
     setIsLoading(true);
+    
+    let formData;
+    if (
+      Array.isArray(data.image) &&
+      data.image.every((item) => item instanceof File)
+    ) {
+      const blobFile = new Blob([data.image[0]], {
+        type: data.image[0].type,
+      });
+      formData = new FormData();
+      formData.append("blobFile", blobFile);
+      formData.append("fileName", data.image[0].name);
+      data.image = formData;
+    }
+
     try {
       const updatedUser = await updateUserInfo({
         userId: user.$id,
