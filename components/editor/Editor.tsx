@@ -11,9 +11,14 @@ import Toolbar from "./plugins/Tooolbar";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { $generateHtmlFromNodes } from "@lexical/html";
 import { SetInitialValuePlugin } from "./plugins/SetInitialValuePlugin";
+import { HeadingNode, QuoteNode } from "@lexical/rich-text";
+import { ListItemNode, ListNode } from "@lexical/list";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+
 const initialConfig = {
   namespace: "Editor",
   theme: editorTheme,
+  nodes: [HeadingNode, QuoteNode, ListNode, ListItemNode],
   onError: (error: Error) => {
     console.error(error);
     throw error;
@@ -48,6 +53,7 @@ function Editor({ initHtml, onChange }: EditorProps) {
               });
             }}
           />
+          <ListPlugin />
           <AutoFocusPlugin />
         </div>
       </div>
