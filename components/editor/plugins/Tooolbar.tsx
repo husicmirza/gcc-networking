@@ -99,7 +99,7 @@ export default function Toolbar() {
         <i className="format redo" />
       </button>
       <Divider />
-      <button
+      {/* <button
         onClick={() => formatParagraph(editor)}
         data-active={activeBlock === "h1" ? "" : undefined}
         className={
@@ -138,7 +138,7 @@ export default function Toolbar() {
         type="button"
       >
         <i className="format h3" />
-      </button>
+      </button> */}
       <Divider />
       <button
         onClick={() => {
