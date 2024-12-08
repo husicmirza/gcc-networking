@@ -19,6 +19,7 @@ import {
 } from "@tabler/icons-react";
 import { User } from "@/types/appwrite.types";
 import FileUploader from "../core/ImageUploader";
+import Editor from "../editor/Editor";
 const EditProfileForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState(false);
   // const router = useRouter();
@@ -32,7 +33,7 @@ const EditProfileForm = ({ user }: { user: User }) => {
   });
   const onSubmit = async (data: EditProfileDataFormType) => {
     setIsLoading(true);
-    
+
     let formData;
     if (
       Array.isArray(data.image) &&
@@ -231,6 +232,19 @@ const EditProfileForm = ({ user }: { user: User }) => {
             <h3 className="text-lg font-bold tracking-tight">About Me</h3>
             <p className="text-muted-foreground">Add your biography</p>
             <Separator />
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.SKELETON}
+              name="biography"
+              renderSkeleton={(field) => (
+                <FormControl>
+                  <Editor
+                    initHtml={field.value as string}
+                    onChange={field.onChange}
+                  />
+                </FormControl>
+              )}
+            />
           </div>
           <Button type="submit" className="w-full mt-8" disabled={isLoading}>
             {isLoading ? (

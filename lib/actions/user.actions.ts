@@ -198,7 +198,7 @@ export const updateUserInfo = async ({
     const { image, ...user } = userData;
     let file;
     let imageUrl;
-    if (image) {
+    if (image && typeof image === "object") {
       const inputFile = InputFile.fromBuffer(
         image.get("blobFile") as Blob,
         image.get("fileName") as string

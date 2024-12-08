@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "@lexical/react": "^0.21.0",
     "@radix-ui/react-checkbox": "^1.1.2",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
@@ -27,6 +28,7 @@
     "date-fns": "^4.1.0",
     "dotted-map": "^2.2.3",
     "framer-motion": "^11.11.8",
+    "lexical": "^0.21.0",
     "motion": "^11.11.17",
     "next": "14.2.15",
     "node-appwrite": "^14.1.0",
