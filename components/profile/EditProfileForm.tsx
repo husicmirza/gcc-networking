@@ -2,7 +2,7 @@
 import { EditProfileDataFormType, editProfileSchema } from "@/lib/validation";
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
+import { Form, FormControl } from "@/components/ui/form";
 
 import { useForm } from "react-hook-form";
 import { useToast } from "@/hooks/use-toast";
@@ -10,8 +10,16 @@ import CustomFormField, { FormFieldType } from "../forms/CustomFormField";
 import { Separator } from "../ui/separator";
 import { updateUserInfo } from "@/lib/actions/user.actions";
 import { Button } from "../ui/button";
-import { IconLoader } from "@tabler/icons-react";
+import {
+  IconBrandFacebook,
+  IconBrandInstagram,
+  IconBrandLinkedin,
+  IconLoader,
+  IconMail,
+} from "@tabler/icons-react";
 import { User } from "@/types/appwrite.types";
+import FileUploader from "../core/ImageUploader";
+import Editor from "../editor/Editor";
 const EditProfileForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState(false);
   // const router = useRouter();
@@ -23,9 +31,23 @@ const EditProfileForm = ({ user }: { user: User }) => {
       status: "pending",
     },
   });
-
   const onSubmit = async (data: EditProfileDataFormType) => {
     setIsLoading(true);
+
+    let formData;
+    if (
+      Array.isArray(data.image) &&
+      data.image.every((item) => item instanceof File)
+    ) {
+      const blobFile = new Blob([data.image[0]], {
+        type: data.image[0].type,
+      });
+      formData = new FormData();
+      formData.append("blobFile", blobFile);
+      formData.append("fileName", data.image[0].name);
+      data.image = formData;
+    }
+
     try {
       const updatedUser = await updateUserInfo({
         userId: user.$id,
@@ -55,17 +77,16 @@ const EditProfileForm = ({ user }: { user: User }) => {
     <Form {...form}>
       <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
         <section className="space-y-3">
-          <h2 className="text-2xl font-bold tracking-tight">Settings</h2>
-          <p className="text-muted-foreground">
-            Manage your personal information.
-          </p>
+          <h2 className="text-2xl font-bold tracking-tight">
+            Settings - Edit Profile
+          </h2>
           <Separator />
         </section>
-        <section className="max-w-xl">
+        <section className="max-w-2xl mx-auto">
           <div className="mb-8">
             <h3 className="text-lg font-bold tracking-tight">Profile</h3>
             <p className="text-muted-foreground">
-              This is how others will see you on the site.
+              Manage your personal information.
             </p>
             <Separator />
           </div>
@@ -130,8 +151,101 @@ const EditProfileForm = ({ user }: { user: User }) => {
             name="email"
             placeholder="john@example.com"
             label="Email"
-            iconSrc="/assets/icons/email.svg"
+            iconSrc={<IconMail />}
           />
+          <CustomFormField
+            control={form.control}
+            fieldType={FormFieldType.INPUT}
+            name="occupation"
+            label="Occupation"
+          />
+          <CustomFormField
+            control={form.control}
+            fieldType={FormFieldType.INPUT}
+            name="company"
+            label="Company"
+          />
+          <CustomFormField
+            control={form.control}
+            fieldType={FormFieldType.INPUT}
+            name="industry"
+            label="Industry"
+          />
+          <div className="grid grid-cols-2 gap-4">
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.INPUT}
+              label="City of Origin"
+              name="cityOfOrigin"
+            />
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.INPUT}
+              label="Country of Origin"
+              name="countryOfOrigin"
+            />
+          </div>
+          <div className="my-8">
+            <h3 className="text-lg font-bold tracking-tight">Social Media</h3>
+            <p className="text-muted-foreground">
+              Add your social media profiles
+            </p>
+            <Separator className="mb-8" />
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.INPUT}
+              name="linkedin"
+              label="Linkedin"
+              iconSrc={<IconBrandLinkedin />}
+            />
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.INPUT}
+              name="instagram"
+              label="Instagram"
+              iconSrc={<IconBrandInstagram />}
+            />
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.INPUT}
+              name="facebook"
+              label="Facebook"
+              iconSrc={<IconBrandFacebook />}
+            />
+          </div>
+          <div className="my-8">
+            <h3 className="text-lg font-bold tracking-tight">Profil Image</h3>
+            <p className="text-muted-foreground">Upload your profile picture</p>
+            <Separator className="mb-8" />
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.SKELETON}
+              name="image"
+              renderSkeleton={(field) => (
+                <FormControl>
+                  <FileUploader onChange={field.onChange} files={field.value} />
+                </FormControl>
+              )}
+            />
+          </div>
+          <div className="my-8">
+            <h3 className="text-lg font-bold tracking-tight">About Me</h3>
+            <p className="text-muted-foreground">Add your biography</p>
+            <Separator className="mb-8" />
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.SKELETON}
+              name="biography"
+              renderSkeleton={(field) => (
+                <FormControl>
+                  <Editor
+                    initHtml={field.value as string}
+                    onChange={field.onChange}
+                  />
+                </FormControl>
+              )}
+            />
+          </div>
           <Button type="submit" className="w-full mt-8" disabled={isLoading}>
             {isLoading ? (
               <>
@@ -139,7 +253,7 @@ const EditProfileForm = ({ user }: { user: User }) => {
                 Loading...
               </>
             ) : (
-              "Update Profile"
+              "Submit for approval"
             )}
           </Button>
         </section>

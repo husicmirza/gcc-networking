@@ -103,3 +103,27 @@ declare type EventHeaderProps = {
   currency: string;
   isFreeEvent: boolean;
 };
+
+declare type ProfileHeaderProps = {
+  imageSrc: string;
+  fullName: string;
+  occupation: string;
+  company: string;
+  location: string;
+  industry: string;
+  userId: string;
+  linkedin: string;
+  facebook: string;
+  instagram: string;
+  isAdmin?: boolean;
+  currentUserId?: string;
+};
+
+declare type AboutProfileProps = {
+  dateOfBirth: string;
+  cityOfOrigin: string;
+  countryOfOrigin: string;
+  email: string;
+  phone: string;
+  biography: string;
+};

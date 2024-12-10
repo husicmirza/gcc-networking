@@ -7,9 +7,16 @@ import { parseStringify } from "../utils";
 import { redirect } from "next/navigation";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 // import { connection } from "next/server";
+import { InputFile } from "node-appwrite/file";
 
-const { DATABASE_ID, USERS_COLLECTION_ID, PUBLIC_USERS_COLLECTION_ID } =
-  process.env;
+const {
+  DATABASE_ID,
+  USERS_COLLECTION_ID,
+  PUBLIC_USERS_COLLECTION_ID,
+  NEXT_PUBLIC_APPWRITE_BUCKET: BUCKET_ID,
+  NEXT_PUBLIC_ENDPOINT: ENDPOINT,
+  NEXT_PUBLIC_PROJECT_ID: PROJECT_ID,
+} = process.env;
 
 export const getUserInfo = async (userId: string) => {
   if (!userId) {
@@ -187,16 +194,31 @@ export const updateUserInfo = async ({
   userData,
 }: UpdateUserInfoParams) => {
   try {
-    const { database } = await createAdminClient();
-
-    const user = await database.updateDocument(
+    const { database, storage } = await createAdminClient();
+    const { image, ...user } = userData;
+    let file;
+    let imageUrl;
+    if (image && typeof image === "object") {
+      const inputFile = InputFile.fromBuffer(
+        image.get("blobFile") as Blob,
+        image.get("fileName") as string
+      );
+      file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile);
+      imageUrl = file?.$id
+        ? `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file.$id}/view??project=${PROJECT_ID}`
+        : null;
+    }
+    const updateUser = await database.updateDocument(
       DATABASE_ID!,
       USERS_COLLECTION_ID!,
       userId,
-      userData
+      {
+        image: imageUrl ? imageUrl : image,
+        ...user,
+      }
     );
     revalidatePath("/dashboard");
-    return parseStringify(user);
+    return parseStringify(updateUser);
   } catch (error) {
     console.log(error);
     return null;

@@ -9,20 +9,7 @@ import {
 import { Button } from "../ui/button";
 import Link from "next/link";
 import ImageWithFallBack from "../core/ImageWithFallback";
-interface ProfileHeaderProps {
-  imageSrc: string;
-  fullName: string;
-  occupation: string;
-  company: string;
-  location: string;
-  industry: string;
-  userId: string;
-  linkedin: string;
-  facebook: string;
-  instagram: string;
-  isAdmin?: boolean;
-  currentUserId?: string;
-}
+
 const ProfileHeader = ({
   imageSrc,
   fullName,

@@ -23,4 +23,5 @@ export interface User extends Models.Document {
   image: string;
   occupation: string;
   publicUser: User;
+  biography: string;
 }

@@ -1,5 +1,19 @@
 import { z } from "zod";
 
+const socialMediaUrlValidation = (platformUrl: string) => {
+  return z
+    .union([
+      z
+        .string()
+        .url(`Must be a valid URL: https://www.url.com`)
+        .refine((url) => url.startsWith(platformUrl), {
+          message: `URL must start with ${platformUrl}`,
+        }),
+      z.literal(""),
+    ])
+    .nullable()
+    .optional();
+};
 export const authFormSchema = (type: string) =>
   z.object({
     firstName:
@@ -68,6 +82,20 @@ export const editProfileSchema = z.object({
     .refine((phone) => /^\+\d{10,15}$/.test(phone), "Invalid phone number"),
   email: z.string().email("Invalid email address"),
   status: z.enum(["created", "pending", "approved", "cancelled"]),
+  occupation: z.string().min(2, "Please enter an occupation"),
+  company: z.string().min(2, "Please enter a company"),
+  industry: z.string().min(2, "Please enter an industry"),
+  cityOfOrigin: z.string().min(2, "Please enter a city of origin"),
+  countryOfOrigin: z.string().min(2, "Please enter a country of origin"),
+  linkedin: socialMediaUrlValidation("https://www.linkedin.com/"),
+  instagram: socialMediaUrlValidation("https://www.instagram.com/"),
+  facebook: socialMediaUrlValidation("https://www.facebook.com/"),
+  image: z
+    .custom((value) => {
+      return typeof value === "string" || typeof value === "object";
+    })
+    .optional(),
+  biography: z.string().min(2, "Please enter a biography"),
 });
 
 export type EditProfileDataFormType = z.infer<typeof editProfileSchema>;
