@@ -247,10 +247,12 @@ export default function Toolbar() {
       >
         <i className="format list-ul" />
       </button>
-      {/* <button
+      {/* 
+      TODO: Implement Link
+      <button
         disabled={false}
         onClick={() => {
-          editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
+          editor.dispatchCommand(TOGGLE_LINK_COMMAND, "link");
         }}
         className={"toolbar-item spaced " + (isUnderline ? "active" : "")}
         aria-label="Format Link"

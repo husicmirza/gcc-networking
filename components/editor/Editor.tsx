@@ -14,11 +14,20 @@ import { SetInitialValuePlugin } from "./plugins/SetInitialValuePlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { ListItemNode, ListNode } from "@lexical/list";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { AutoLinkNode, LinkNode } from "@lexical/link";
+import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 
 const initialConfig = {
   namespace: "Editor",
   theme: editorTheme,
-  nodes: [HeadingNode, QuoteNode, ListNode, ListItemNode],
+  nodes: [
+    HeadingNode,
+    QuoteNode,
+    ListNode,
+    ListItemNode,
+    AutoLinkNode,
+    LinkNode,
+  ],
   onError: (error: Error) => {
     console.error(error);
     throw error;
@@ -28,6 +37,12 @@ const initialConfig = {
 interface EditorProps {
   initHtml: string;
   onChange: (htmlString: string | null) => void;
+}
+const urlRegExp = new RegExp(
+  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[\w]*))?)/
+);
+export function validateUrl(url: string): boolean {
+  return url === "https://" || urlRegExp.test(url);
 }
 
 function Editor({ initHtml, onChange }: EditorProps) {
@@ -54,6 +69,7 @@ function Editor({ initHtml, onChange }: EditorProps) {
             }}
           />
           <ListPlugin />
+          <LinkPlugin validateUrl={validateUrl} />
           <AutoFocusPlugin />
         </div>
       </div>

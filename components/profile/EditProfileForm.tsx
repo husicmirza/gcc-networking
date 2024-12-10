@@ -231,7 +231,7 @@ const EditProfileForm = ({ user }: { user: User }) => {
           <div className="my-8">
             <h3 className="text-lg font-bold tracking-tight">About Me</h3>
             <p className="text-muted-foreground">Add your biography</p>
-            <Separator />
+            <Separator className="mb-8" />
             <CustomFormField
               control={form.control}
               fieldType={FormFieldType.SKELETON}
