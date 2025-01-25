@@ -4,7 +4,7 @@ import AboutProfile from "./AboutProfile";
 import { getCurrentUser, getUserInfo } from "@/lib/actions/user.actions";
 import ProfileAlert from "./ProfileAlert";
 
-const ProfileContainer = async ({ userId }: { userId: string }) => {
+const ProfileWrapper = async ({ userId }: { userId: string }) => {
   const [user, currentUser] = await Promise.all([
     getUserInfo(userId),
     getCurrentUser(),
@@ -40,4 +40,4 @@ const ProfileContainer = async ({ userId }: { userId: string }) => {
     </div>
   );
 };
-export default ProfileContainer;
+export default ProfileWrapper;

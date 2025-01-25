@@ -4,7 +4,7 @@ import FiltersWrapper from "../filters/FiltersWrapper";
 import { getPublicUsers } from "@/lib/actions/publicUsers.actions";
 import { User } from "@/types/appwrite.types";
 
-const ProfilesContainer = async ({
+const ProfilesWrapper = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -41,4 +41,4 @@ const ProfilesContainer = async ({
   );
 };
 
-export default ProfilesContainer;
+export default ProfilesWrapper;

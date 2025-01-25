@@ -1,7 +1,7 @@
-import CompaniesContainer from "@/components/companies/CompaniesContainer";
+import CompaniesWrapper from "@/components/companies/CompaniesWrapper";
 
 const CompaniesPage = () => {
-  return <CompaniesContainer />;
+  return <CompaniesWrapper />;
 };
 
 export default CompaniesPage;

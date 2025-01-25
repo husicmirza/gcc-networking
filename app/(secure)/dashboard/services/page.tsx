@@ -1,5 +1,5 @@
-import ServicesContainer from "@/components/services/ServicesContainer";
+import ServicesWrapper from "@/components/services/ServicesWrapper";
 
 export default async function ServicesPage() {
-  return <ServicesContainer />;
+  return <ServicesWrapper />;
 }
