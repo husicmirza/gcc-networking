@@ -1,4 +1,4 @@
-import ProfilesContainer from "@/components/profile/ProfilesContainer";
+import ProfilesWrapper from "@/components/profile/ProfilesWrapper";
 import { ProfilesSkeletonWrapper } from "@/components/skeletons/ProfilesSkeleton";
 import { Suspense } from "react";
 
@@ -14,7 +14,7 @@ const ProfilesPage = ({
       key={serializedSearchParams}
       fallback={<ProfilesSkeletonWrapper />}
     >
-      <ProfilesContainer searchParams={searchParams} />
+      <ProfilesWrapper searchParams={searchParams} />
     </Suspense>
   );
 };

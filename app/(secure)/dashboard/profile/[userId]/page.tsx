@@ -1,4 +1,4 @@
-import ProfileContainer from "@/components/profile/ProfileContainer";
+import ProfileWrapper from "@/components/profile/ProfileWrapper";
 import { ProfileSkeleton } from "@/components/skeletons/ProfileSkeleton";
 import React, { Suspense } from "react";
 
@@ -9,7 +9,7 @@ export default async function ProfilePage({
 
   return (
     <Suspense key={serializedSearchParams} fallback={<ProfileSkeleton />}>
-      <ProfileContainer userId={userId} />
+      <ProfileWrapper userId={userId} />
     </Suspense>
   );
 }
