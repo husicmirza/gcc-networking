@@ -5,8 +5,11 @@ import Link from "next/link";
 
 export const CallToAction = () => {
   return (
-    <section className="w-full py-20 border-t border-neutral-200">
-      <div className="max-w-5xl mx-auto relative">
+    <section className="w-full py-40 relative">
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-info/5 to-info/10" />
+
+      <div className="max-w-7xl mx-auto relative px-4">
         <div className="text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold">
             Be Part of a Balkan Expat Network

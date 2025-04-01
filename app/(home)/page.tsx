@@ -6,7 +6,7 @@ import { AuroraBackground } from "@/components/ui/aurora-background";
 export default function Home() {
   return (
     <AuroraBackground className="-mt-12 md:-mt-36 pt-36">
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen w-full">
         <Hero />
         <Features />
         <CallToAction />

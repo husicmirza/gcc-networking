@@ -5,7 +5,7 @@ import { Badge } from "../ui/badge";
 
 const Features = () => {
   return (
-    <div className="w-full py-20 border-t border-neutral-200">
+    <div className="w-full max-w-7xl mx-auto py-40 px-4 border-t border-neutral-200">
       <div className="flex flex-col items-center justify-center gap-y-10 mb-4">
         <Badge variant="info" className="text-md">
           Features
