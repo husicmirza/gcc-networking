@@ -36,16 +36,19 @@ const Feature = ({
         "flex flex-col py-10 relative group/feature rounded-b-lg justify-center items-center"
       )}
     >
-      <div className="absolute left-0 top-1/2inset-y-0 h-12 group-hover/feature:h-10 w-1.5 rounded-tr-full rounded-br-full bg-neutral-300 group-hover/feature:bg-[#0ea5e9] transition-all duration-200 origin-center" />
+      <div className="absolute left-0 top-1/2 inset-y-0 h-12 group-hover/feature:h-10 w-1.5 rounded-tr-full rounded-br-full bg-neutral-300 group-hover/feature:bg-[#0ea5e9] transition-all duration-200 origin-center " />
       {index < 4 && (
         <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-neutral-100 to-transparent pointer-events-none" />
       )}
       {index >= 4 && (
         <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-neutral-100 to-transparent pointer-events-none" />
       )}
-      <div className="mb-4 relative z-10 px-10 text-neutral-600">{icon}</div>
+      <div className="mb-4 relative z-10 px-10 text-neutral-600 group-hover/feature:text-[#0ea5e9]">
+        {icon}
+      </div>
+
       <div className="text-lg font-bold mb-2 relative z-10 px-10">
-        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-neutral-700">
+        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-neutral-700 text-center">
           {title}
         </span>
       </div>
