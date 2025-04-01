@@ -1,13 +1,25 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { features } from "@/constants";
+import { Badge } from "../ui/badge";
 
 const Features = () => {
   return (
-    <div className="w-full py-10">
-      <h2 className="text-2xl md:text-4xl font-extralight text-center pb-10">
-        The Ultimate Expat Hub
-      </h2>
+    <div className="w-full py-20 border-t border-neutral-200">
+      <div className="flex flex-col items-center justify-center gap-y-10 mb-4">
+        <Badge variant="info" className="text-md">
+          Features
+        </Badge>
+        <h2 className="text-2xl md:text-4xl font-semibold text-center ">
+          The Ultimate Expat Hub
+        </h2>
+        <p className="text-center text-neutral-600 max-w-2xl">
+          Discover a world of possibilities designed specifically for expats
+          like you. From seamless networking to local insights, explore tools
+          and features that make your international journey extraordinary.
+        </p>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 w-full px-4">
         {features.map((feature, index) => (
           <Feature key={feature.title} {...feature} index={index} />
