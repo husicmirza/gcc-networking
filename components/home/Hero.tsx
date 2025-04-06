@@ -16,13 +16,16 @@ export function Hero() {
         className="relative flex flex-col gap-4 items-center justify-center px-4"
       >
         <p className="font-bold text-4xl sm:text-5xl md:text-7xl text-neutral-700">
-          Balkan <span className="text-neutral-400">Connect</span>
+          Balkan{" "}
+          <span className="bg-gradient-to-b from-info to-info/50 bg-clip-text text-transparent">
+            Connect
+          </span>
         </p>
-        <div className="font-extralight text-2xl md:text-4xl pb-12 pt-2 text-center">
+        <div className="font-extralight text-2xl md:text-4xl pb-12 pt-2 text-center text-neutral-600">
           Connecting Balkan Expats Across the Middle East.
         </div>
       </motion.div>
-      <div className="max-w-7xl w-full px-4">
+      <div className="max-w-7xl w-full px-4 mx-auto pb-40">
         <WorldMap
           dots={[
             {

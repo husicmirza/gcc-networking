@@ -7,9 +7,6 @@ import {
   IconBriefcase,
   IconDashboard,
   IconCalendarEvent,
-  IconTerminal2,
-  IconEaseInOut,
-  IconCurrencyDollar,
   IconWorldSearch,
   IconBooks,
   IconSpeakerphone,
@@ -835,23 +832,23 @@ export const features = [
     title: "Discover Balkan Expats",
     description:
       "Easily find and connect with fellow Balkan expats living in the Middle East.",
-    icon: <IconWorldSearch />,
+    icon: <IconWorldSearch width={40} height={40} />,
   },
   {
     title: "Guides & Tips",
     description: "Navigate your journey with curated guides and tips.",
-    icon: <IconBooks />,
+    icon: <IconBooks width={40} height={40} />,
   },
   {
     title: "Events to Connect & Celebrate",
     description:
       "Stay updated on the latest events, gatherings, and cultural celebrations happening across the region",
-    icon: <IconSpeakerphone />,
+    icon: <IconSpeakerphone width={40} height={40} />,
   },
   {
     title: "Discover Companies & Services",
     description:
       "Explore Balkan-owned businesses and services operating in the Middle East.",
-    icon: <IconBuildings />,
+    icon: <IconBuildings width={40} height={40} />,
   },
 ];

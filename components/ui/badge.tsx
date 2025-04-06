@@ -13,6 +13,7 @@ const badgeVariants = cva(
         destructive:
           "border-destructive bg-destructive-foreground text-destructive",
         success: "border-success bg-success-foreground text-success",
+        info: "border-info bg-info-foreground text-info",
         outline: "text-foreground",
       },
     },
