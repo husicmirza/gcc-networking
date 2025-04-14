@@ -2,7 +2,7 @@ import React from "react";
 import { DataTable } from "../core/DataTable";
 import { getUsers } from "@/lib/actions/user.actions";
 import { columns } from "./columns";
-import ProfileFiltersWrapper from "../filters/ProfileFiltersWrapper";
+import ProfileFiltersWrapper from "../filters/ProfileApprovalFiltersWrapper";
 
 const AdminPanel = async ({
   searchParams,
