@@ -3,6 +3,7 @@ import { Grid, ProfileGridItem } from "../ui/grid";
 import FiltersWrapper from "../filters/FiltersWrapper";
 import { getPublicUsers } from "@/lib/actions/publicUsers.actions";
 import { User } from "@/types/appwrite.types";
+import Pagination from "../pagination/Pagination";
 
 const ProfilesWrapper = async ({
   searchParams,
@@ -10,7 +11,6 @@ const ProfilesWrapper = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const users = await getPublicUsers(searchParams);
-
   return (
     <div className="flex space-y-8 flex-col max-w-5xl mx-auto w-full">
       <div className="border-b pb-2">
@@ -21,8 +21,8 @@ const ProfilesWrapper = async ({
       </div>
       <FiltersWrapper />
       <Grid>
-        {users.length > 0 &&
-          users
+        {users?.documents.length > 0 &&
+          users?.documents
             .filter((user: User) => user.status === "approved")
             .map((user: User) => (
               <ProfileGridItem
@@ -37,6 +37,9 @@ const ProfilesWrapper = async ({
               />
             ))}
       </Grid>
+      <div className="flex sm:justify-end">
+        <Pagination totalRecords={users?.total} pageSize={8} />
+      </div>
     </div>
   );
 };

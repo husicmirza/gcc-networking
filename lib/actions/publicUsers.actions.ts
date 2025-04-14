@@ -51,7 +51,11 @@ export const getPublicUsers = async (searchParams?: {
   try {
     const { database } = await createAdminClient();
 
-    const queries = [];
+    const currentPage = Number(searchParams?.current_page) || 1;
+    const pageSize = 8;
+    const offset = (currentPage - 1) * pageSize;
+
+    const queries = [Query.limit(pageSize), Query.offset(offset)];
     if (searchParams?.industry && searchParams.industry !== "all")
       queries.push(Query.equal("industry", searchParams.industry as string));
     if (searchParams?.country && searchParams.country !== "all")
@@ -73,7 +77,11 @@ export const getPublicUsers = async (searchParams?: {
       PUBLIC_USERS_COLLECTION_ID!,
       queries
     );
-    return parseStringify(users.documents);
+    console.log(users);
+    return {
+      documents: parseStringify(users.documents),
+      total: users.total,
+    };
   } catch (error) {
     console.log(error);
     return null;
