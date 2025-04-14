@@ -13,7 +13,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { statusOptions } from "@/constants";
 
-const ProfileFilters = () => {
+const ProfileApprovalFilters = () => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const [searchTerm, setSearchTerm] = useState(searchParams.get("query") || "");
@@ -104,4 +104,4 @@ const ProfileFilters = () => {
   );
 };
 
-export default ProfileFilters;
+export default ProfileApprovalFilters;

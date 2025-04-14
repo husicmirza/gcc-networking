@@ -21,7 +21,7 @@ const Filters = () => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
-  const isPoplePage = pathname.includes("people");
+  const isPoplePage = pathname.includes("profile");
   const [searchTerm, setSearchTerm] = useState(searchParams.get("query") || "");
   const [industry, setIndustry] = useState(
     searchParams.get("industry") || "all"

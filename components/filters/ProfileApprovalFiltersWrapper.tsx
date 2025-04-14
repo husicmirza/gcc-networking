@@ -6,15 +6,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import ProfileFilters from "./ProfileFilters";
+import ProfileApprovalFilters from "./ProfileApprovalFilters";
 
-const ProfileFiltersWrapper = () => {
+const ProfileApprovalFiltersWrapper = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <div>
       <div className="md:flex w-full justify-between hidden">
-        <ProfileFilters />
+        <ProfileApprovalFilters />
       </div>
       <div className="block md:hidden">
         <Sheet open={open} onOpenChange={() => setOpen(!open)}>
@@ -23,7 +23,7 @@ const ProfileFiltersWrapper = () => {
           </SheetTrigger>
           <SheetContent side="bottom" className="flex flex-col gap-4">
             <SheetTitle className="pb-2 border-b">Filters</SheetTitle>
-            <ProfileFilters />
+            <ProfileApprovalFilters />
           </SheetContent>
         </Sheet>
       </div>
@@ -31,4 +31,4 @@ const ProfileFiltersWrapper = () => {
   );
 };
 
-export default ProfileFiltersWrapper;
+export default ProfileApprovalFiltersWrapper;
