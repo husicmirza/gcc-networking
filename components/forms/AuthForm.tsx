@@ -24,6 +24,7 @@ const AuthForm = ({ type }: { type: string }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
+  const url = window.location.origin + "/forgot-password";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,13 +64,12 @@ const AuthForm = ({ type }: { type: string }) => {
       }
 
       if (type === "forgot-password") {
-        await forgotPassword({ email: data.email });
+        await forgotPassword({ email: data.email, url: url });
         toast({
+          variant: "success",
           title: "Reset link sent!",
           description: "We've sent a password reset link to your email.",
-          variant: "success",
         });
-        router.push("/login");
         return;
       }
 

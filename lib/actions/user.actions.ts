@@ -225,16 +225,19 @@ export const updateUserInfo = async ({
   }
 };
 
-export const forgotPassword = async ({ email }: { email: string }) => {
+export const forgotPassword = async ({
+  email,
+  url,
+}: {
+  email: string;
+  url: string;
+}) => {
   try {
     const { account } = await createAdminClient();
-    const result = await account.createRecovery(
-      email,
-      "http://localhost:3000/login"
-    );
-
+    const result = await account.createRecovery(email, url);
     console.log(result);
   } catch (error) {
-    console.error("Error", error);
+    console.log(error);
+    return null;
   }
 };
