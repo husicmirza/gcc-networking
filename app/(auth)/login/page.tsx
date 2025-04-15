@@ -1,9 +1,13 @@
+import { Suspense } from "react";
 import AuthForm from "@/components/forms/AuthForm";
+import { IconLoader } from "@tabler/icons-react";
 
 const Login = () => {
   return (
     <section className="flex items-center justify-center h-screen">
-      <AuthForm type="login" />
+      <Suspense fallback={<IconLoader size={50} className="animate-spin" />}>
+        <AuthForm type="login" />
+      </Suspense>
     </section>
   );
 };

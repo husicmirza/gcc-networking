@@ -6,7 +6,7 @@ import {
   resetPasswordSchema,
   registerSchema,
 } from "@/lib/validation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { z } from "zod";
@@ -179,10 +179,14 @@ const AuthForm = ({ type }: AuthFormProps): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
-  const url = window.location.origin + "/reset-password";
+  const [url, setUrl] = useState("");
   const searchParams = useSearchParams();
   const secret = searchParams.get("secret");
   const userId = searchParams.get("userId");
+
+  useEffect(() => {
+    setUrl(process.env.NEXT_PUBLIC_DOMAIN + "/reset-password");
+  }, []);
 
   const formSchema = authFormSchema(type);
   const defaultValues =
