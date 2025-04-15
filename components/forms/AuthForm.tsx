@@ -9,7 +9,7 @@ import Link from "next/link";
 import CustomFormField, { FormFieldType } from "./CustomFormField";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { logIn, signUp } from "@/lib/actions/user.actions";
+import { forgotPassword, logIn, signUp } from "@/lib/actions/user.actions";
 import { useToast } from "@/hooks/use-toast";
 import { IconChevronLeft, IconLoader, IconMail } from "@tabler/icons-react";
 
@@ -63,10 +63,11 @@ const AuthForm = ({ type }: { type: string }) => {
       }
 
       if (type === "forgot-password") {
-        // TODO: Implement forgot password functionality
+        await forgotPassword({ email: data.email });
         toast({
           title: "Reset link sent!",
           description: "We've sent a password reset link to your email.",
+          variant: "success",
         });
         router.push("/login");
         return;
