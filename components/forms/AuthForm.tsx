@@ -1,5 +1,11 @@
 "use client";
-import { authFormSchema } from "@/lib/validation";
+import {
+  authFormSchema,
+  loginSchema,
+  forgotPasswordSchema,
+  resetPasswordSchema,
+  registerSchema,
+} from "@/lib/validation";
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
@@ -179,13 +185,34 @@ const AuthForm = ({ type }: AuthFormProps): JSX.Element => {
   const userId = searchParams.get("userId");
 
   const formSchema = authFormSchema(type);
+  const defaultValues =
+    type === "signup"
+      ? {
+          email: "",
+          password: "",
+          confirmPassword: "",
+          firstName: "",
+          lastName: "",
+          address1: "",
+          city: "",
+          country: "",
+          zipCode: "",
+          dateOfBirth: "",
+          phone: "",
+        }
+      : type === "reset-password"
+      ? {
+          password: "",
+          confirmPassword: "",
+        }
+      : {
+          email: "",
+          password: "",
+        };
+
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
+    defaultValues,
   });
 
   const handleAuthAction = async (data: FormData) => {
@@ -194,31 +221,37 @@ const AuthForm = ({ type }: AuthFormProps): JSX.Element => {
       let user;
 
       switch (type) {
-        case "signup":
+        case "signup": {
+          const signupData = data as z.infer<typeof registerSchema>;
           user = await signUp({
-            firstName: data.firstName!,
-            lastName: data.lastName!,
-            address1: data.address1!,
-            city: data.city!,
-            country: data.country!,
-            zipCode: data.zipCode!,
-            dateOfBirth: data.dateOfBirth!,
-            phone: data.phone!,
-            email: data.email!,
-            password: data.password!,
+            firstName: signupData.firstName,
+            lastName: signupData.lastName,
+            address1: signupData.address1,
+            city: signupData.city,
+            country: signupData.country,
+            zipCode: signupData.zipCode,
+            dateOfBirth: signupData.dateOfBirth,
+            phone: signupData.phone,
+            email: signupData.email,
+            password: signupData.password,
+            status: "created",
           });
           break;
+        }
 
-        case "login":
+        case "login": {
+          const loginData = data as z.infer<typeof loginSchema>;
           user = await logIn({
-            email: data.email!,
-            password: data.password!,
+            email: loginData.email,
+            password: loginData.password,
           });
           break;
+        }
 
-        case "forgot-password":
+        case "forgot-password": {
+          const forgotData = data as z.infer<typeof forgotPasswordSchema>;
           const forgotResult = await forgotPassword({
-            email: data.email!,
+            email: forgotData.email,
             url,
           });
           if (forgotResult) {
@@ -231,13 +264,15 @@ const AuthForm = ({ type }: AuthFormProps): JSX.Element => {
             throw new Error("Failed to send reset link");
           }
           return;
+        }
 
-        case "reset-password":
+        case "reset-password": {
           if (!secret || !userId) throw new Error("Missing reset parameters");
+          const resetData = data as z.infer<typeof resetPasswordSchema>;
           const resetResult = await resetPassword({
             secret,
             userId,
-            password: data.password!,
+            password: resetData.password,
           });
           if (resetResult) {
             toast({
@@ -250,6 +285,7 @@ const AuthForm = ({ type }: AuthFormProps): JSX.Element => {
             throw new Error("Failed to reset password");
           }
           return;
+        }
       }
 
       if (user) {
