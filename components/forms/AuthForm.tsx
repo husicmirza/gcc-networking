@@ -12,8 +12,14 @@ import { useRouter } from "next/navigation";
 import { logIn, signUp } from "@/lib/actions/user.actions";
 import { useToast } from "@/hooks/use-toast";
 import { IconChevronLeft, IconLoader, IconMail } from "@tabler/icons-react";
+
 const AuthForm = ({ type }: { type: string }) => {
-  const typeLable = type === "login" ? "Login" : "Sign up";
+  const typeLable =
+    type === "login"
+      ? "Login"
+      : type === "signup"
+      ? "Sign up"
+      : "Reset Password";
   const formSchema = authFormSchema(type);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -26,7 +32,7 @@ const AuthForm = ({ type }: { type: string }) => {
       password: "",
     },
   });
-  // TODO: format date
+
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     let user;
@@ -43,7 +49,7 @@ const AuthForm = ({ type }: { type: string }) => {
           phone: data.phone!,
           email: data.email,
           status: data.status,
-          password: data.password,
+          password: data.password!,
         };
 
         user = await signUp(userData);
@@ -52,10 +58,20 @@ const AuthForm = ({ type }: { type: string }) => {
       if (type === "login") {
         user = await logIn({
           email: data.email,
-          password: data.password,
+          password: data.password!,
         });
       }
-      //TODO: rediret to edit profile on create, redirect to home on login. Add toast for create
+
+      if (type === "forgot-password") {
+        // TODO: Implement forgot password functionality
+        toast({
+          title: "Reset link sent!",
+          description: "We've sent a password reset link to your email.",
+        });
+        router.push("/login");
+        return;
+      }
+
       if (user) {
         router.push("/");
       } else {
@@ -77,7 +93,7 @@ const AuthForm = ({ type }: { type: string }) => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex items-center justify-center py-12">
           <div className="mx-auto grid w-[350px] gap-6">
-            <Link href="/">
+            <Link href={type === "forgot-password" ? "/login" : "/"}>
               <Button variant={"link"} type="button">
                 <IconChevronLeft />
                 Back
@@ -88,7 +104,9 @@ const AuthForm = ({ type }: { type: string }) => {
               <p className="text-balance text-muted-foreground">
                 {type === "login"
                   ? "Enter your email below to login to your account"
-                  : "Enter your information to create an account"}
+                  : type === "signup"
+                  ? "Enter your information to create an account"
+                  : "Enter your email to reset your password"}
               </p>
             </div>
 
@@ -160,26 +178,30 @@ const AuthForm = ({ type }: { type: string }) => {
                 iconSrc={<IconMail />}
               />
 
-              <CustomFormField
-                control={form.control}
-                fieldType={FormFieldType.INPUT}
-                name="password"
-                label="Password"
-                type="password"
-              />
-              <Link
-                href="/forgot-password"
-                className="inline-block text-sm underline"
-              >
-                Forgot your password?
-              </Link>
+              {type !== "forgot-password" && (
+                <CustomFormField
+                  control={form.control}
+                  fieldType={FormFieldType.INPUT}
+                  name="password"
+                  label="Password"
+                  type="password"
+                />
+              )}
+
+              {type === "login" && (
+                <Link
+                  href="/forgot-password"
+                  className="inline-block text-sm underline"
+                >
+                  Forgot your password?
+                </Link>
+              )}
 
               <Button
                 type="submit"
                 className="w-full mt-2"
                 disabled={isLoading}
               >
-                {" "}
                 {isLoading ? (
                   <>
                     <IconLoader size={20} className="animate-spin" />
@@ -187,23 +209,27 @@ const AuthForm = ({ type }: { type: string }) => {
                   </>
                 ) : type === "login" ? (
                   "Login"
-                ) : (
+                ) : type === "signup" ? (
                   "Create an account"
+                ) : (
+                  "Reset Password"
                 )}
               </Button>
             </div>
-            <div className="mt-2 text-center text-sm">
-              {type === "login"
-                ? "Don't have an account? "
-                : "Already have an account? "}
+            {type !== "forgot-password" && (
+              <div className="mt-2 text-center text-sm">
+                {type === "login"
+                  ? "Don't have an account? "
+                  : "Already have an account? "}
 
-              <Link
-                href={type === "login" ? "/signup" : "/login"}
-                className="underline"
-              >
-                {type === "login" ? "Sign up" : "Sign in"}
-              </Link>
-            </div>
+                <Link
+                  href={type === "login" ? "/signup" : "/login"}
+                  className="underline"
+                >
+                  {type === "login" ? "Sign up" : "Sign in"}
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </form>
