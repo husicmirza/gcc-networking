@@ -15,59 +15,109 @@ const socialMediaUrlValidation = (platformUrl: string) => {
     .optional();
 };
 export const authFormSchema = (type: string) =>
-  z.object({
-    firstName:
-      type === "login" || type === "forgot-password"
-        ? z.string().optional()
-        : z.string().min(2, "First name must be at least 2 characters"),
-    lastName:
-      type === "login" || type === "forgot-password"
-        ? z.string().optional()
-        : z.string().min(2, "Last name must be at least 2 characters"),
-    address1:
-      type === "login" || type === "forgot-password"
-        ? z.string().optional()
-        : z.string().min(2, "Please enter an address"),
-    city:
-      type === "login" || type === "forgot-password"
-        ? z.string().optional()
-        : z.string().min(2, "Please enter a city"),
-    country:
-      type === "login" || type === "forgot-password"
-        ? z.string().optional()
-        : z.string().min(2, "Please enter a country"),
-    zipCode:
-      type === "login" || type === "forgot-password"
-        ? z.string().optional()
-        : z
-            .string()
-            .min(3, "Zip code must be at least 3 characters")
-            .max(6, "Zip code must be at most 6 characters"),
-    dateOfBirth:
-      type === "login" || type === "forgot-password"
-        ? z.string().optional()
-        : z.coerce.string().min(2, "Invalid date of birth"),
-    phone:
-      type === "login" || type === "forgot-password"
-        ? z.string().optional()
-        : z
-            .string()
-            .refine(
-              (phone) => /^\+\d{10,15}$/.test(phone),
-              "Invalid phone number"
-            ),
-    status:
-      type === "login" || type === "forgot-password"
-        ? z.string().optional()
-        : z
-            .enum(["created", "pending", "approved", "cancelled"])
-            .default("created"),
-    email: z.string().email("Invalid email address"),
-    password:
-      type === "forgot-password"
-        ? z.string().optional()
-        : z.string().min(8, "Password must be at least 8 characters long"),
-  });
+  z
+    .object({
+      firstName:
+        type === "login" ||
+        type === "forgot-password" ||
+        type === "reset-password"
+          ? z.string().optional()
+          : z.string().min(2, "First name must be at least 2 characters"),
+      lastName:
+        type === "login" ||
+        type === "forgot-password" ||
+        type === "reset-password"
+          ? z.string().optional()
+          : z.string().min(2, "Last name must be at least 2 characters"),
+      address1:
+        type === "login" ||
+        type === "forgot-password" ||
+        type === "reset-password"
+          ? z.string().optional()
+          : z.string().min(2, "Please enter an address"),
+      city:
+        type === "login" ||
+        type === "forgot-password" ||
+        type === "reset-password"
+          ? z.string().optional()
+          : z.string().min(2, "Please enter a city"),
+      country:
+        type === "login" ||
+        type === "forgot-password" ||
+        type === "reset-password"
+          ? z.string().optional()
+          : z.string().min(2, "Please enter a country"),
+      zipCode:
+        type === "login" ||
+        type === "forgot-password" ||
+        type === "reset-password"
+          ? z.string().optional()
+          : z
+              .string()
+              .min(3, "Zip code must be at least 3 characters")
+              .max(6, "Zip code must be at most 6 characters"),
+      dateOfBirth:
+        type === "login" ||
+        type === "forgot-password" ||
+        type === "reset-password"
+          ? z.string().optional()
+          : z.coerce.string().min(2, "Invalid date of birth"),
+      phone:
+        type === "login" ||
+        type === "forgot-password" ||
+        type === "reset-password"
+          ? z.string().optional()
+          : z
+              .string()
+              .refine(
+                (phone) => /^\+\d{10,15}$/.test(phone),
+                "Invalid phone number"
+              ),
+      status:
+        type === "login" ||
+        type === "forgot-password" ||
+        type === "reset-password"
+          ? z.string().optional()
+          : z
+              .enum(["created", "pending", "approved", "cancelled"])
+              .default("created"),
+      email:
+        type === "reset-password"
+          ? z.string().optional()
+          : z.string().email("Invalid email address"),
+      password:
+        type === "forgot-password"
+          ? z.string().optional()
+          : z
+              .string()
+              .min(8, "Password must be at least 8 characters long")
+              .regex(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+              ),
+      confirmPassword:
+        type === "reset-password"
+          ? z
+              .string()
+              .min(8, "Password must be at least 8 characters long")
+              .regex(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+              )
+          : z.string().optional(),
+    })
+    .refine(
+      (data) => {
+        if (type === "reset-password") {
+          return data.password === data.confirmPassword;
+        }
+        return true;
+      },
+      {
+        message: "Passwords don't match",
+        path: ["confirmPassword"],
+      }
+    );
 
 export const editProfileSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),

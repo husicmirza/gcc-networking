@@ -8,10 +8,15 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import CustomFormField, { FormFieldType } from "./CustomFormField";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { forgotPassword, logIn, signUp } from "@/lib/actions/user.actions";
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  forgotPassword,
+  logIn,
+  signUp,
+  resetPassword,
+} from "@/lib/actions/user.actions";
 import { useToast } from "@/hooks/use-toast";
-import { IconChevronLeft, IconLoader, IconMail } from "@tabler/icons-react";
+import { IconArrowNarrowLeft, IconLoader, IconMail } from "@tabler/icons-react";
 
 const AuthForm = ({ type }: { type: string }) => {
   const typeLable =
@@ -19,18 +24,24 @@ const AuthForm = ({ type }: { type: string }) => {
       ? "Login"
       : type === "signup"
       ? "Sign up"
+      : type === "reset-password"
+      ? "Set New Password"
       : "Reset Password";
   const formSchema = authFormSchema(type);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
-  const url = window.location.origin + "/forgot-password";
+  const url = window.location.origin + "/reset-password";
+  const searchParams = useSearchParams();
+  const secret = searchParams.get("secret");
+  const userId = searchParams.get("userId");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
@@ -48,7 +59,7 @@ const AuthForm = ({ type }: { type: string }) => {
           zipCode: data.zipCode!,
           dateOfBirth: data.dateOfBirth!,
           phone: data.phone!,
-          email: data.email,
+          email: data.email!,
           status: data.status,
           password: data.password!,
         };
@@ -58,19 +69,49 @@ const AuthForm = ({ type }: { type: string }) => {
 
       if (type === "login") {
         user = await logIn({
-          email: data.email,
+          email: data.email!,
           password: data.password!,
         });
       }
 
       if (type === "forgot-password") {
-        await forgotPassword({ email: data.email, url: url });
-        toast({
-          variant: "success",
-          title: "Reset link sent!",
-          description: "We've sent a password reset link to your email.",
-        });
+        const result = await forgotPassword({ email: data.email!, url: url });
+        if (result) {
+          toast({
+            variant: "success",
+            title: "Reset link sent!",
+            description: "We've sent a password reset link to your email.",
+          });
+        } else {
+          toast({
+            variant: "destructive",
+            title: "Something went wrong!",
+            description: "Please try again.",
+          });
+        }
         return;
+      }
+
+      if (type === "reset-password" && secret && userId) {
+        const result = await resetPassword({
+          secret,
+          userId,
+          password: data.password!,
+        });
+        if (result) {
+          toast({
+            variant: "success",
+            title: "Password updated!",
+            description: "Your password has been successfully updated.",
+          });
+          router.push("/login");
+        } else {
+          toast({
+            variant: "destructive",
+            title: "Something went wrong!",
+            description: "Please try again.",
+          });
+        }
       }
 
       if (user) {
@@ -94,11 +135,16 @@ const AuthForm = ({ type }: { type: string }) => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex items-center justify-center py-12">
           <div className="mx-auto grid w-[350px] gap-6">
-            <Link href={type === "forgot-password" ? "/login" : "/"}>
-              <Button variant={"link"} type="button">
-                <IconChevronLeft />
-                Back
-              </Button>
+            <Link
+              href={
+                type === "forgot-password" || type === "reset-password"
+                  ? "/login"
+                  : "/"
+              }
+              className="flex items-center gap-2 w-fit pr-2 py-1"
+            >
+              <IconArrowNarrowLeft />
+              Back
             </Link>
             <div className="grid gap-2 text-center">
               <h1 className="text-3xl font-bold">{typeLable}</h1>
@@ -107,6 +153,8 @@ const AuthForm = ({ type }: { type: string }) => {
                   ? "Enter your email below to login to your account"
                   : type === "signup"
                   ? "Enter your information to create an account"
+                  : type === "reset-password"
+                  ? "Enter your new password below"
                   : "Enter your email to reset your password"}
               </p>
             </div>
@@ -170,23 +218,38 @@ const AuthForm = ({ type }: { type: string }) => {
                   />
                 </>
               )}
-              <CustomFormField
-                control={form.control}
-                fieldType={FormFieldType.INPUT}
-                name="email"
-                placeholder="john@example.com"
-                label="Email"
-                iconSrc={<IconMail />}
-              />
-
-              {type !== "forgot-password" && (
+              {type !== "reset-password" && (
                 <CustomFormField
                   control={form.control}
                   fieldType={FormFieldType.INPUT}
-                  name="password"
-                  label="Password"
-                  type="password"
+                  name="email"
+                  placeholder="john@example.com"
+                  label="Email"
+                  iconSrc={<IconMail />}
                 />
+              )}
+
+              {type !== "forgot-password" && (
+                <>
+                  <CustomFormField
+                    control={form.control}
+                    fieldType={FormFieldType.INPUT}
+                    name="password"
+                    label={
+                      type === "reset-password" ? "New Password" : "Password"
+                    }
+                    type="password"
+                  />
+                  {type === "reset-password" && (
+                    <CustomFormField
+                      control={form.control}
+                      fieldType={FormFieldType.INPUT}
+                      name="confirmPassword"
+                      label="Confirm Password"
+                      type="password"
+                    />
+                  )}
+                </>
               )}
 
               {type === "login" && (
@@ -212,12 +275,14 @@ const AuthForm = ({ type }: { type: string }) => {
                   "Login"
                 ) : type === "signup" ? (
                   "Create an account"
+                ) : type === "reset-password" ? (
+                  "Update Password"
                 ) : (
                   "Reset Password"
                 )}
               </Button>
             </div>
-            {type !== "forgot-password" && (
+            {type !== "forgot-password" && type !== "reset-password" && (
               <div className="mt-2 text-center text-sm">
                 {type === "login"
                   ? "Don't have an account? "
