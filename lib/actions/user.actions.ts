@@ -224,3 +224,39 @@ export const updateUserInfo = async ({
     return null;
   }
 };
+
+export const forgotPassword = async ({
+  email,
+  url,
+}: {
+  email: string;
+  url: string;
+}) => {
+  try {
+    const { account } = await createAdminClient();
+    await account.createRecovery(email, url);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export async function resetPassword({
+  secret,
+  userId,
+  password,
+}: {
+  secret: string;
+  userId: string;
+  password: string;
+}) {
+  try {
+    const { account } = await createAdminClient();
+    await account.updateRecovery(userId, secret, password);
+    return true;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}

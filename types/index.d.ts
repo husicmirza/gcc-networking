@@ -28,6 +28,7 @@ declare type SignUpParams = {
   phone: string;
   email: string;
   password: string;
+  status: Status;
 };
 
 declare type Author = {
