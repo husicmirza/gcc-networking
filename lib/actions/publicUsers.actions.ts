@@ -3,7 +3,7 @@ import { ID, Query } from "node-appwrite";
 import { createAdminClient } from "../appwrite.config";
 import { formatUserData, parseStringify } from "../utils";
 import { User } from "@/types/appwrite.types";
-import { revalidatePath } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 
 const { DATABASE_ID, PUBLIC_USERS_COLLECTION_ID } = process.env;
 export const createPublicUser = async ({ userData }: { userData: User }) => {
@@ -48,6 +48,8 @@ export const updatePublicUserInfo = async ({
 export const getPublicUsers = async (searchParams?: {
   [key: string]: string | string[] | undefined;
 }) => {
+  noStore();
+
   try {
     const { database } = await createAdminClient();
 
