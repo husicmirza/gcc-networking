@@ -15,7 +15,7 @@ export const Grid = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4",
+        "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-fr",
         className
       )}
     >
@@ -40,7 +40,7 @@ export const CompanyGridItem = ({
   return (
     <div
       className={cn(
-        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input p-4 bg-white border border-neutral-200 flex flex-col space-y-4 shadow-sm cursor-pointer",
+        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input p-4 bg-white border border-neutral-200 flex flex-col space-y-4 shadow-sm cursor-pointer h-full",
         className
       )}
     >
@@ -83,7 +83,7 @@ export const ProfileGridItem = ({
     <Link href={`/dashboard/profile/${userId}`}>
       <div
         className={cn(
-          "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input bg-white border border-neutral-200 flex flex-col shadow-sm cursor-pointer",
+          "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input bg-white border border-neutral-200 flex flex-col shadow-sm cursor-pointer h-full",
           className
         )}
       >
@@ -99,8 +99,10 @@ export const ProfileGridItem = ({
           <Badge variant="success">{industry}</Badge>
         </div>
         <div className="group-hover/bento:translate-x-2 transition duration-200 px-6 py-4">
-          <h1 className="font-bold font-sans text-neutral-600">{fullName}</h1>
-          <p className="py-2 font-sans font-normal text-neutral-600 text-xs">
+          <h1 className="font-bold font-sans text-neutral-600 text-base">
+            {fullName}
+          </h1>
+          <p className="mt-1 font-sans font-normal text-neutral-600 text-xs">
             {ocupation} at {company}
           </p>
           <div className="flex items-center mt-2 gap-x-2">
@@ -133,7 +135,7 @@ export const ServiceGridItem = ({
   return (
     <div
       className={cn(
-        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input bg-white border border-neutral-200 flex flex-col shadow-sm cursor-pointer",
+        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input bg-white border border-neutral-200 flex flex-col shadow-sm cursor-pointer h-full",
         className
       )}
     >
